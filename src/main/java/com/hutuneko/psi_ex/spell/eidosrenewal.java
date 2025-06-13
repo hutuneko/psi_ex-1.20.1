@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
-import com.hutuneko.psi_ex.PsiEX; // for MOD_ID
+import com.hutuneko.psi_ex.PsiEX;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
 public class eidosrenewal extends PieceTrick {
