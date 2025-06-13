@@ -1,5 +1,6 @@
 package com.hutuneko.psi_ex.spell;
 
+import com.hutuneko.psi_ex.PsiEX;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
@@ -9,21 +10,22 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.internal.Vector3;
 import net.minecraft.core.particles.ParticleTypes;
 
-public class eidosrenewal extends SpellPiece implements eidosrenewal_in {
+public class eidosrenewal extends SpellPiece {
 
     public eidosrenewal(Spell spell) {
         super(spell);
     }
 
-    @Override
+
     @OnlyIn(Dist.CLIENT)
     public Material getMaterial() {
-        // atlas = blocks, path = assets/psi/textures/spell/icon/eidos_renewal.png
+        // NOTE: use your mod’s namespace (psi_ex), *not* “psi”
         return new Material(
                 TextureAtlas.LOCATION_BLOCKS,
-                new ResourceLocation("psi", "spell/icon/eidos_renewal")
+                new ResourceLocation(PsiEX.MOD_ID, "spell/icon/eidos_renewal")
         );
     }
+
 
     @Override
     public EnumPieceType getPieceType() {
@@ -36,7 +38,7 @@ public class eidosrenewal extends SpellPiece implements eidosrenewal_in {
     }
 
     @Override
-    public Object evaluate() throws SpellCompilationException {
+    public Object evaluate() {
         return null;
     }
 
