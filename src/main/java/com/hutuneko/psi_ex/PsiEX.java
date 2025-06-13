@@ -21,7 +21,8 @@ public class PsiEX {
     public PsiEX() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::registerSpellPieces); // ← setup メソッドをちゃんと登録
+        modBus.addListener(this::registerSpellPieces);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -37,14 +38,17 @@ public class PsiEX {
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            PsiAPI.registerSpellPiece(
-                    new ResourceLocation("psi", "eidos_renewal"),
-                    eidosrenewal.class
-            );
-            LOGGER.info("[PsiEX] Registered spell piece: eidos_renewal");
-        });
+            ResourceLocation pieceId = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
 
+            PsiAPI.registerSpellPiece(pieceId, eidosrenewal.class);
+            LOGGER.info("[PsiEX] Registered spell piece: {}", pieceId);
+
+            ResourceLocation tex = new ResourceLocation(PsiEX.MOD_ID, "spell/icon/eidos_renewal");
+            PsiAPI.registerSpellPieceAndTexture(tex, eidosrenewal.class);
+            LOGGER.info("[PsiEX] Registered texture for {}: {}", pieceId, tex);
+        });
     }
+
 
 
 }

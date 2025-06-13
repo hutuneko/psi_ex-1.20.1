@@ -223,3 +223,8 @@ dependencies {
     implementation fg.deobf("curse.maven:psi-241665:6472034")
     implementation fg.deobf("curse.maven:patchouli-306770:4892162")
 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
