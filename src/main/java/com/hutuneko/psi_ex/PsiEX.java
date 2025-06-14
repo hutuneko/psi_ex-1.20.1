@@ -1,6 +1,6 @@
 package com.hutuneko.psi_ex;
 
-import com.hutuneko.psi_ex.spell.eidosrenewal;
+import com.hutuneko.psi_ex.spell.eidos_renewal;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -38,17 +38,9 @@ public class PsiEX {
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ResourceLocation pieceId = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
-
-            PsiAPI.registerSpellPiece(pieceId, eidosrenewal.class);
-            LOGGER.info("[PsiEX] Registered spell piece: {}", pieceId);
-
-            ResourceLocation tex = new ResourceLocation(PsiEX.MOD_ID, "spell/icon/eidos_renewal");
-            PsiAPI.registerSpellPieceAndTexture(tex, eidosrenewal.class);
-            LOGGER.info("[PsiEX] Registered texture for {}: {}", pieceId, tex);
+            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
+              PsiAPI.registerSpellPieceAndTexture(id, eidos_renewal.class);
         });
+
     }
-
-
-
 }
