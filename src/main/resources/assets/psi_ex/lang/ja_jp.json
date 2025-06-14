@@ -1,4 +1,6 @@
 {
-  "psi_ex.spellpiece.eidos_renewal": "エイドス書き換え",
-  "psi_ex.spellpiece.eidos_renewal.desc": "エイドスを書き換えます。"
+  "psi_ex.spellpiece.HP_eidos_renewal": "HP書き換え",
+  "psi_ex.spellpiece.HP_eidos_renewal.desc": "HPを書き換えます。",
+  "psi_ex.spellpiece.Coordinate_eidos_renewal": "書き換え",
+  "psi_ex.spellpiece.Coordinate_eidos_renewal.desc": "いろいろ書き換えます。"
 }

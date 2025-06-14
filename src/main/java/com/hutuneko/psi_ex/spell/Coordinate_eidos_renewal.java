@@ -1,21 +1,26 @@
 package com.hutuneko.psi_ex.spell;
 
+import com.hutuneko.psi_ex.PsiEX;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraftforge.registries.ForgeRegistries;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.api.spell.param.ParamEntity;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.SpellContext;
 
+import java.util.List;
 import java.util.Objects;
 
-public class eidos_renewal extends PieceTrick {
+public class Coordinate_eidos_renewal extends PieceTrick {
     private ParamEntity targetParam;
     private ParamNumber         valueParam;
 
-    public eidos_renewal(Spell spell) {
+    public Coordinate_eidos_renewal(Spell spell) {
         super(spell);
     }
 
@@ -24,7 +29,9 @@ public class eidos_renewal extends PieceTrick {
 
         addParam(targetParam = new ParamEntity(SpellParam.GENERIC_NAME_TARGET,SpellParam.GREEN,false,false// エンティティ描画用レンダラー
         ));
-        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER,SpellParam.BLUE,true,true
+        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER1,SpellParam.BLUE,false,true
+        ));
+        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER2,SpellParam.RED,false,true
         ));
     }
 
@@ -36,7 +43,6 @@ public class eidos_renewal extends PieceTrick {
         } catch (SpellCompilationException e) {
             throw new RuntimeException(e);
         }
-        // コストや威力はお好みで調整してください
         try {
             meta.addStat(EnumSpellStat.POTENCY, 50);
         } catch (SpellCompilationException e) {
@@ -61,23 +67,35 @@ public class eidos_renewal extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        // ① targetParam（ParamEntity<Entity>）から値を取得
+
         Entity e = this.getParamValue(context, targetParam);
 
-        // ② valueParam（ParamNumber）から Number を取得して double に変換
-        Number raw = this.getParamValue(context, valueParam);
-        double hpVal = raw.doubleValue();
+        Number nraw = this.getParamValue(context, valueParam);
+        double n = nraw.doubleValue();
 
-        // 以下、既存ロジック…
+        Number mraw = this.getParamValue(context, valueParam);
+        double m = mraw.doubleValue();
+
         if (!context.isInRadius(e)) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }
         if (!(e instanceof LivingEntity living)) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         }
-        Objects.requireNonNull(living.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(hpVal);
-        if (living.getHealth() > hpVal) {
-            living.setHealth((float) hpVal);
+
+        List<String> validAttrs = PsiEX.listAllAttributeNames();
+
+        String Name = validAttrs.get((int) n);
+
+        ResourceLocation rl = new ResourceLocation(Name);
+        Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(rl);
+        if (attribute == null) {
+            throw new SpellRuntimeException("Unknown attribute");
+        }
+
+        Objects.requireNonNull(living.getAttribute(attribute)).setBaseValue(m);
+        if ((n == 0) && (living.getHealth() > m)) {
+            living.setHealth((float) m);
         }
         return null;
     }

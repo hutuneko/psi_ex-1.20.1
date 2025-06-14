@@ -1,6 +1,7 @@
 package com.hutuneko.psi_ex;
 
-import com.hutuneko.psi_ex.spell.eidos_renewal;
+import com.hutuneko.psi_ex.spell.Coordinate_eidos_renewal;
+import com.hutuneko.psi_ex.spell.HP_eidos_renewal;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +12,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import vazkii.psi.api.PsiAPI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(PsiEX.MOD_ID)
 public class PsiEX {
@@ -23,6 +27,14 @@ public class PsiEX {
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::registerSpellPieces);
 
+    }
+
+    public static List<String> listAllAttributeNames() {
+        List<String> names = new ArrayList<>();
+        for (ResourceLocation rl : ForgeRegistries.ATTRIBUTES.getKeys()) {
+            names.add(rl.toString());
+        }
+        return names;
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -38,8 +50,12 @@ public class PsiEX {
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
-              PsiAPI.registerSpellPieceAndTexture(id, eidos_renewal.class);
+            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "hp_eidos_renewal");
+              PsiAPI.registerSpellPieceAndTexture(id, HP_eidos_renewal.class);
+        });
+        event.enqueueWork(() -> {
+            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal");
+                PsiAPI.registerSpellPieceAndTexture(id, Coordinate_eidos_renewal.class);
         });
 
     }
