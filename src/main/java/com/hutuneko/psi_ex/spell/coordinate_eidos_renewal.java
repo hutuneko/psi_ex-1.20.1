@@ -5,7 +5,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.registries.ForgeRegistries;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -16,11 +15,13 @@ import vazkii.psi.api.spell.SpellContext;
 import java.util.List;
 import java.util.Objects;
 
-public class Coordinate_eidos_renewal extends PieceTrick {
-    private ParamEntity targetParam;
-    private ParamNumber         valueParam;
+public class coordinate_eidos_renewal extends PieceTrick {
 
-    public Coordinate_eidos_renewal(Spell spell) {
+    SpellParam<Entity> targetParam;
+    SpellParam<Number> indexParam;
+    SpellParam<Number> valueParam;
+
+    public coordinate_eidos_renewal(Spell spell) {
         super(spell);
     }
 
@@ -29,7 +30,7 @@ public class Coordinate_eidos_renewal extends PieceTrick {
 
         addParam(targetParam = new ParamEntity(SpellParam.GENERIC_NAME_TARGET,SpellParam.GREEN,false,false// エンティティ描画用レンダラー
         ));
-        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER1,SpellParam.BLUE,false,true
+        addParam(indexParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER1,SpellParam.BLUE,false,true
         ));
         addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER2,SpellParam.RED,false,true
         ));
@@ -37,22 +38,10 @@ public class Coordinate_eidos_renewal extends PieceTrick {
 
 
     @Override
-    public void addToMetadata(SpellMetadata meta) {
-        try {
-            super.addToMetadata(meta);
-        } catch (SpellCompilationException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            meta.addStat(EnumSpellStat.POTENCY, 50);
-        } catch (SpellCompilationException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            meta.addStat(EnumSpellStat.COST, 100);
-        } catch (SpellCompilationException e) {
-            throw new RuntimeException(e);
-        }
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        super.addToMetadata(meta);
+        meta.addStat(EnumSpellStat.POTENCY, 50);
+        meta.addStat(EnumSpellStat.COST,    100);
     }
 
     @Override
@@ -70,7 +59,7 @@ public class Coordinate_eidos_renewal extends PieceTrick {
 
         Entity e = this.getParamValue(context, targetParam);
 
-        Number nraw = this.getParamValue(context, valueParam);
+        Number nraw = this.getParamValue(context, indexParam);
         double n = nraw.doubleValue();
 
         Number mraw = this.getParamValue(context, valueParam);

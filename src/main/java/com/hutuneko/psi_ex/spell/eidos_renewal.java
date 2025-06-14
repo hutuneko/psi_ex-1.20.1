@@ -11,11 +11,11 @@ import vazkii.psi.api.spell.SpellContext;
 
 import java.util.Objects;
 
-public class HP_eidos_renewal extends PieceTrick {
+public class eidos_renewal extends PieceTrick {
     private ParamEntity targetParam;
     private ParamNumber         valueParam;
 
-    public HP_eidos_renewal(Spell spell) {
+    public eidos_renewal(Spell spell) {
         super(spell);
     }
 
@@ -36,7 +36,6 @@ public class HP_eidos_renewal extends PieceTrick {
         } catch (SpellCompilationException e) {
             throw new RuntimeException(e);
         }
-        // コストや威力はお好みで調整してください
         try {
             meta.addStat(EnumSpellStat.POTENCY, 50);
         } catch (SpellCompilationException e) {
@@ -49,19 +48,18 @@ public class HP_eidos_renewal extends PieceTrick {
         }
     }
 
-    @Override
-    public EnumPieceType getPieceType() {
-        return EnumPieceType.TRICK;
-    }
-
-    @Override
-    public Class<?> getEvaluationType() {
-        return Void.class;
-    }
+//    @Override
+//    public EnumPieceType getPieceType() {
+//        return EnumPieceType.TRICK;
+//    }
+//
+//    @Override
+//    public Class<?> getEvaluationType() {
+//        return Void.class;
+//    }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-
         Entity e = this.getParamValue(context, targetParam);
 
         Number raw = this.getParamValue(context, valueParam);
