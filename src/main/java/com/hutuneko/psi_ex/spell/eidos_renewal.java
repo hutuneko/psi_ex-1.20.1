@@ -21,8 +21,13 @@ public class eidos_renewal extends PieceTrick {
 
     @Override
     public void initParams() {
-        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.RED, false, true));
+
+        addParam(targetParam = new ParamEntity(SpellParam.GENERIC_NAME_TARGET,SpellParam.GREEN,false,false// エンティティ描画用レンダラー
+        ));
+        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER,SpellParam.BLUE,true,true
+        ));
     }
+
 
     @Override
     public void addToMetadata(SpellMetadata meta) {
@@ -56,23 +61,25 @@ public class eidos_renewal extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Entity e     = targetParam.getValue(context);
-        double hpVal = valueParam.getValue(context);
+        // ① targetParam（ParamEntity<Entity>）から値を取得
+        Entity e = this.getParamValue(context, targetParam);
 
+        // ② valueParam（ParamNumber）から Number を取得して double に変換
+        Number raw = this.getParamValue(context, valueParam);
+        double hpVal = raw.doubleValue();
+
+        // 以下、既存ロジック…
         if (!context.isInRadius(e)) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }
-
         if (!(e instanceof LivingEntity living)) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         }
-
         Objects.requireNonNull(living.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(hpVal);
-
         if (living.getHealth() > hpVal) {
             living.setHealth((float) hpVal);
         }
-
         return null;
     }
+
 }

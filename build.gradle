@@ -223,9 +223,8 @@ dependencies {
     // Forge本体
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     // Psi API。実行時はMod Jarを使い、コンパイル時だけ参照する
-    compileOnly fg.deobf("curse.maven:psi-241665:6472034")
-    // Patchouliも同様なら
-    compileOnly fg.deobf("curse.maven:patchouli-306770:4892162")
+        implementation fg.deobf("curse.maven:psi-241665:6472034")
+        implementation fg.deobf("curse.maven:patchouli-306770:4892162")
 }
 
 
