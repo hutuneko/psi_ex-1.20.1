@@ -54,9 +54,16 @@ public class PsiEX {
               PsiAPI.registerSpellPieceAndTexture(id, eidos_renewal.class);
         });
         event.enqueueWork(() -> {
+            ResourceLocation group = new ResourceLocation(PsiEX.MOD_ID,"custom_advances");
             ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal");
                 PsiAPI.registerSpellPieceAndTexture(id, PieceTrick_coordinate_eidos_renewal.class);
+            PsiAPI.addPieceToGroup(
+                    PieceTrick_coordinate_eidos_renewal.class,
+                    group,
+                    true
+            );
         });
+
 
     }
 }
