@@ -17,9 +17,12 @@ import java.util.Objects;
 
 public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
 
-    SpellParam<Entity> targetParam;
-    SpellParam<Number> indexParam;
-    SpellParam<Number> valueParam;
+//    SpellParam<Entity> targetParam;
+//    SpellParam<Number> indexParam;
+//    SpellParam<Number> valueParam;
+    private ParamEntity targetParam;
+    private ParamNumber indexParam;
+    private ParamNumber valueParam;
 
     public PieceTrick_coordinate_eidos_renewal(Spell spell) {
         super(spell);
@@ -28,11 +31,20 @@ public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
     @Override
     public void initParams() {
 
-        addParam(targetParam = new ParamEntity(SpellParam.GENERIC_NAME_TARGET,SpellParam.GREEN,false,false// エンティティ描画用レンダラー
+        addParam(targetParam = new ParamEntity(SpellParam.GENERIC_NAME_TARGET,
+                SpellParam.GREEN,
+                false,
+                false
         ));
-        addParam(indexParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER1,SpellParam.BLUE,false,true
+        addParam(indexParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER1,
+                SpellParam.BLUE,
+                false,
+                true
         ));
-        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER2,SpellParam.RED,false,true
+        addParam(valueParam = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER2,
+                SpellParam.RED,
+                false,
+                true
         ));
     }
 
@@ -77,7 +89,9 @@ public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
         String Name = validAttrs.get((int) n);
 
         ResourceLocation rl = new ResourceLocation(Name);
+
         Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(rl);
+
         if (attribute == null) {
             throw new SpellRuntimeException("Unknown attribute");
         }
