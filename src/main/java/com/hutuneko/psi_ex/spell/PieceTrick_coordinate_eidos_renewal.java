@@ -1,6 +1,7 @@
 package com.hutuneko.psi_ex.spell;
 
 import com.hutuneko.psi_ex.PsiEX;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -94,11 +95,15 @@ public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
 
         if (attribute == null) {
             throw new SpellRuntimeException("Unknown attribute");
-        }
-
-        Objects.requireNonNull(living.getAttribute(attribute)).setBaseValue(m);
-        if ((n == 0) && (living.getHealth() > m)) {
-            living.setHealth((float) m);
+        }else{
+            Objects.requireNonNull(living.getAttribute(attribute)).setBaseValue(m);
+            if ((n == 0) && (living.getHealth() > m)) {
+                living.setHealth((float) m);
+            }
+            context.caster.displayClientMessage(
+                    Component.literal("変更した属性: " + rl.toString()),
+                    true  // 真ならアクションバー、偽ならチャット欄
+            );
         }
         return null;
     }
