@@ -15,13 +15,13 @@ import vazkii.psi.api.spell.SpellContext;
 import java.util.List;
 import java.util.Objects;
 
-public class coordinate_eidos_renewal extends PieceTrick {
+public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
 
     SpellParam<Entity> targetParam;
     SpellParam<Number> indexParam;
     SpellParam<Number> valueParam;
 
-    public coordinate_eidos_renewal(Spell spell) {
+    public PieceTrick_coordinate_eidos_renewal(Spell spell) {
         super(spell);
     }
 

@@ -48,15 +48,15 @@ public class eidos_renewal extends PieceTrick {
         }
     }
 
-//    @Override
-//    public EnumPieceType getPieceType() {
-//        return EnumPieceType.TRICK;
-//    }
-//
-//    @Override
-//    public Class<?> getEvaluationType() {
-//        return Void.class;
-//    }
+    @Override
+    public EnumPieceType getPieceType() {
+        return EnumPieceType.TRICK;
+    }
+
+    @Override
+    public Class<?> getEvaluationType() {
+        return Void.class;
+    }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {

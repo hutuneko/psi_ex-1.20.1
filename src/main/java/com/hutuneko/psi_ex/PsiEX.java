@@ -1,6 +1,6 @@
 package com.hutuneko.psi_ex;
 
-import com.hutuneko.psi_ex.spell.coordinate_eidos_renewal;
+import com.hutuneko.psi_ex.spell.PieceTrick_coordinate_eidos_renewal;
 import com.hutuneko.psi_ex.spell.eidos_renewal;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -55,7 +55,7 @@ public class PsiEX {
         });
         event.enqueueWork(() -> {
             ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal");
-                PsiAPI.registerSpellPieceAndTexture(id, coordinate_eidos_renewal.class);
+                PsiAPI.registerSpellPieceAndTexture(id, PieceTrick_coordinate_eidos_renewal.class);
         });
 
     }
