@@ -102,7 +102,7 @@ public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
             }
             context.caster.displayClientMessage(
                     Component.literal("変更した属性: " + rl.toString()),
-                    true  // 真ならアクションバー、偽ならチャット欄
+                    true
             );
         }
         return null;

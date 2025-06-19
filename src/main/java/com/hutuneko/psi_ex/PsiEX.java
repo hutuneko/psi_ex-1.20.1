@@ -1,6 +1,9 @@
 package com.hutuneko.psi_ex;
 
+import com.hutuneko.psi_ex.item.ModItems;
+import com.hutuneko.psi_ex.spell.PieceSelector_data;
 import com.hutuneko.psi_ex.spell.PieceTrick_coordinate_eidos_renewal;
+import com.hutuneko.psi_ex.spell.PieceTrick_copy;
 import com.hutuneko.psi_ex.spell.eidos_renewal;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -26,6 +29,7 @@ public class PsiEX {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::registerSpellPieces);
+        ModItems.register(modBus);
 
     }
 
@@ -50,8 +54,16 @@ public class PsiEX {
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "pieceselector_data");
+            PsiAPI.registerSpellPieceAndTexture(id, PieceSelector_data.class);
+        });
+        event.enqueueWork(() -> {
             ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
               PsiAPI.registerSpellPieceAndTexture(id, eidos_renewal.class);
+        });
+        event.enqueueWork(() -> {
+            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "copy");
+            PsiAPI.registerSpellPieceAndTexture(id, PieceTrick_copy.class);
         });
         event.enqueueWork(() -> {
             ResourceLocation group = new ResourceLocation(PsiEX.MOD_ID,"custom_advances");
