@@ -1,10 +1,7 @@
 package com.hutuneko.psi_ex;
 
 import com.hutuneko.psi_ex.item.ModItems;
-import com.hutuneko.psi_ex.spell.PieceSelector_data;
-import com.hutuneko.psi_ex.spell.PieceTrick_coordinate_eidos_renewal;
-import com.hutuneko.psi_ex.spell.PieceTrick_copy;
-import com.hutuneko.psi_ex.spell.eidos_renewal;
+import com.hutuneko.psi_ex.spell.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -53,29 +50,14 @@ public class PsiEX {
     }
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
+        LOGGER.info("🔧 registerSpellPieces が呼ばれました");
         event.enqueueWork(() -> {
-            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "pieceselector_data");
-            PsiAPI.registerSpellPieceAndTexture(id, PieceSelector_data.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_data"), PieceSelector_data.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "copy"), PieceTrick_copy.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal"), eidos_renewal.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal"), PieceTrick_coordinate_eidos_renewal.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_castscroll"), PieceTrick_CastScroll.class);
         });
-        event.enqueueWork(() -> {
-            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal");
-              PsiAPI.registerSpellPieceAndTexture(id, eidos_renewal.class);
-        });
-        event.enqueueWork(() -> {
-            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "copy");
-            PsiAPI.registerSpellPieceAndTexture(id, PieceTrick_copy.class);
-        });
-        event.enqueueWork(() -> {
-            ResourceLocation group = new ResourceLocation(PsiEX.MOD_ID,"custom_advances");
-            ResourceLocation id = new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal");
-                PsiAPI.registerSpellPieceAndTexture(id, PieceTrick_coordinate_eidos_renewal.class);
-            PsiAPI.addPieceToGroup(
-                    PieceTrick_coordinate_eidos_renewal.class,
-                    group,
-                    true
-            );
-        });
-
-
     }
 }

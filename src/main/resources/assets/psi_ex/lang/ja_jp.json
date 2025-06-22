@@ -2,5 +2,11 @@
   "psi_ex.spellpiece.eidos_renewal": "HP書き換え",
   "psi_ex.spellpiece.eidos_renewal.desc": "HPを書き換えます。",
   "psi_ex.spellpiece.coordinate_eidos_renewal": "書き換え",
-  "psi_ex.spellpiece.coordinate_eidos_renewal.desc": "いろいろ書き換えます。"
+  "psi_ex.spellpiece.coordinate_eidos_renewal.desc": "いろいろ書き換えます。",
+  "psi_ex.spellpiece.pieceselector_data": "ストレージサーチ",
+  "psi_ex.spellpiece.pieceselector_data.desc": "ストレージの中身を引き出します",
+  "psi_ex.spellpiece.copy": "コピー",
+  "psi_ex.spellpiece.copy.desc": "ストレージの中身をコピペします。",
+  "psi_ex.spellpiece.piecetrick_castscroll": "コピー",
+  "psi_ex.spellpiece.piecetrick_castscroll.desc": "ストレージの中身をコピペします。"
 }

@@ -8,9 +8,13 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -18,6 +22,9 @@ import vazkii.psi.api.spell.param.ParamAny;
 import vazkii.psi.api.spell.param.ParamVector;
 
 public class PieceTrick_copy extends PieceTrick {
+    // ロガーを宣言
+    private static final Logger LOGGER = LogManager.getLogger();
+
     // --- パラメータ定義 ---
     private ParamVector posParam;
     private ParamVector xParam;
@@ -32,15 +39,15 @@ public class PieceTrick_copy extends PieceTrick {
     @Override
     public void initParams() {
 
-        addParam(posParam = new ParamVector(SpellParam.GENERIC_NAME_VECTOR3,SpellParam.BLUE,false,false
+//        addParam(posParam = new ParamVector(SpellParam.GENERIC_NAME_VECTOR3,SpellParam.BLUE,false,false
+//        ));
+
+        addParam(xParam = new ParamVector(SpellParam.GENERIC_NAME_X,SpellParam.BLUE,false,false
         ));
-//        addParam(xParam = new ParamVector(SpellParam.GENERIC_NAME_X,SpellParam.BLUE,false,false
-//        ));
-//        addParam(yParam = new ParamVector(SpellParam.GENERIC_NAME_Y,SpellParam.BLUE,false,false
-//        ));
-//        addParam(zParam = new ParamVector(SpellParam.GENERIC_NAME_Z,SpellParam.BLUE,false,false
-//        ));
-        // ② ItemStorage から取得する NBT リスト
+        addParam(yParam = new ParamVector(SpellParam.GENERIC_NAME_Y,SpellParam.BLUE,false,false
+        ));
+        addParam(zParam = new ParamVector(SpellParam.GENERIC_NAME_Z,SpellParam.BLUE,false,false
+        ));
         addParam(storageParam = new ParamAny(SpellParam.GENERIC_NAME_LIST,
                 1,false
         ));
@@ -65,72 +72,102 @@ public class PieceTrick_copy extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        // --- 1. 座標取得・丸め ---
-        Vector3 vec = getParamValue(context, posParam);
+        Vector3 vx = getParamValue(context, xParam);
+        Vector3 vy = getParamValue(context, yParam);
+        Vector3 vz = getParamValue(context, zParam);
+        if (context.caster == null) {
+            throw new SpellRuntimeException("Must be a player");
+        }
+        Player player = context.caster;
+        Level world = player.level();
+        Vector3 v = getParamValue(context, posParam);
         BlockPos target = new BlockPos(
-                (int) Math.floor(vec.x),
-                (int) Math.floor(vec.y),
-                (int) Math.floor(vec.z)
+                (int) Math.floor(v.x),
+                (int) Math.floor(v.y),
+                (int) Math.floor(v.z)
+        );
+        player.displayClientMessage(
+                Component.literal("DEBUG: target = " + target),
+                true
         );
 
-        // --- 2. 保存データ取得 & キャスト ---
+        // --- デバッグ2: storageデータサイズ ---
         Object raw = getParamValue(context, storageParam);
-        if (!(raw instanceof ListTag)) {
-            throw new SpellRuntimeException("No stored data");
+        if (!(raw instanceof ListTag stored)) {
+            player.displayClientMessage(
+                    Component.literal("DEBUG: dataParam is not ListTag"),
+                    true
+            );
+            throw new SpellRuntimeException("No storage data provided");
         }
-        ListTag stored = (ListTag) raw;
+        player.displayClientMessage(
+                Component.literal("DEBUG: stored list size = " + stored.size()),
+                true
+        );
 
-        // --- 3. 該当 NBT タグをリストから検索 ---
+        // --- 該当エントリ検索 ---
         CompoundTag found = null;
-        for (Tag entry : stored) {
-            if (!(entry instanceof CompoundTag tag)) continue;
-            BlockPos p;
-            if (tag.contains("x") && tag.contains("y") && tag.contains("z")) {
-                p = new BlockPos(tag.getInt("x"), tag.getInt("y"), tag.getInt("z"));
-            } else if (tag.contains("Pos")) {
+        for (Tag t : stored) {
+            if (!(t instanceof CompoundTag tag)) continue;
+            BlockPos p = null;
+            if (tag.contains("Pos")) {
                 p = BlockPos.of(tag.getLong("Pos"));
-            } else continue;
-            if (p.equals(target)) {
+            } else if (tag.contains("x") && tag.contains("y") && tag.contains("z")) {
+                p = new BlockPos(tag.getInt("x"), tag.getInt("y"), tag.getInt("z"));
+            }
+            if (p != null && p.equals(target)) {
                 found = tag;
                 break;
             }
         }
         if (found == null) {
+            player.displayClientMessage(
+                    Component.literal("DEBUG: no entry found at " + target),
+                    true
+            );
             throw new SpellRuntimeException("No stored data at " + target);
         }
+        player.displayClientMessage(
+                Component.literal("DEBUG: found entry keys = " + found.getAllKeys()),
+                true
+        );
 
-        Level world = context.caster.level();
+        // --- ブロック状態復元 ---
+        if (world.isClientSide) {
+            // クライアントでは何もしない
+            return null;
+        }
+        // サーバー側のワールドにキャスト
+        ServerLevel serverWorld = (ServerLevel) world;
 
-        // --- 4. ブロック状態の復元 ---
+        // 例: デバッグログをサーバーコンソールに出力
+        LOGGER.info("ストレージ内エントリ数 = {}, 配置先 = {}", stored.size(), target);
+
+        // ブロック状態の復元
         if (found.contains("block_state", Tag.TAG_COMPOUND)) {
             CompoundTag stateTag = found.getCompound("block_state");
-            // 1.20+ では HolderGetter<Block> を渡す必要がある
             BlockState state = NbtUtils.readBlockState(
-                    (net.minecraft.core.HolderGetter<net.minecraft.world.level.block.Block>) world.registryAccess().registryOrThrow(Registries.BLOCK),
+                    (net.minecraft.core.HolderGetter<net.minecraft.world.level.block.Block>) serverWorld.registryAccess().registryOrThrow(Registries.BLOCK),
                     stateTag
             );
-            world.setBlock(target, state, 3);
+            LOGGER.info("配置ブロック = {} at {}", state.getBlock(), target);
+            // setBlockAndUpdate でクライアントにも即時同期
+            serverWorld.setBlockAndUpdate(target, state);
         }
 
-        // --- 5. タイルエンティティの復元 ---
-        if (found.contains("id", Tag.TAG_STRING)) {
-            CompoundTag beTag = found.copy();
-            beTag.remove("x");
-            beTag.remove("y");
-            beTag.remove("z");
-            BlockEntity be = world.getBlockEntity(target);
+        // タイルエンティティの復元
+        if (found.contains("block_entity", Tag.TAG_COMPOUND)) {
+            CompoundTag beTag = found.getCompound("block_entity");
+            beTag.remove("x"); beTag.remove("y"); beTag.remove("z");
+            BlockEntity be = serverWorld.getBlockEntity(target);
             if (be != null) {
                 be.load(beTag);
                 be.setChanged();
+                LOGGER.info("タイルエンティティを復元: {}", be.getType());
             }
         }
 
-        // --- 6. 完了メッセージ ---
-        context.caster.displayClientMessage(
-                Component.literal("Placed block at " + target),
-                false
-        );
-
         return null;
     }
+
 }

@@ -1,12 +1,12 @@
 package com.hutuneko.psi_ex.spell;
 
 import com.hutuneko.psi_ex.item.ItemStorage;
-import com.hutuneko.psi_ex.item.ModItems;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import vazkii.psi.api.spell.Spell;
+import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 
 public class PieceSelector_data extends PieceSelector {
@@ -21,17 +21,24 @@ public class PieceSelector_data extends PieceSelector {
         return Double.class;
     }
 
-    public static ListTag findStorageDataInPlayerInv(Player player) {
-        Inventory inv = player.getInventory();
-        for (int slot = 0; slot < inv.getContainerSize(); slot++) {
-            ItemStack stack = inv.getItem(slot);
-            if (!stack.isEmpty() && stack.getItem() == ModItems.STORAGE.get()) {
-                return ItemStorage.getStoredBlocks(stack);
-            }
+    @Override
+    public ListTag execute(SpellContext context) throws SpellRuntimeException {
+        if (context.caster == null) {
+            throw new SpellRuntimeException("Must be a player");
+        }
+        Player player = context.caster;
+
+        // 手に持っている storage アイテムを取得
+        ItemStack stack = player.getMainHandItem();
+        if (stack.isEmpty() || stack.getItem() != com.hutuneko.psi_ex.item.ModItems.STORAGE.get()) {
+            throw new SpellRuntimeException("No storage item in hand");
         }
 
-        return PieceSelector_data.findStorageDataInPlayerInv(player);
-
+        // ItemStorage ユーティリティで中身の ListTag をそのまま返す
+        return ItemStorage.getStoredBlocks(stack);
     }
+
 }
+
+
 
