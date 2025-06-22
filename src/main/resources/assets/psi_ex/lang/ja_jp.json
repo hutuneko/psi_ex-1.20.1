@@ -7,6 +7,8 @@
   "psi_ex.spellpiece.pieceselector_data.desc": "ストレージの中身を引き出します",
   "psi_ex.spellpiece.copy": "コピー",
   "psi_ex.spellpiece.copy.desc": "ストレージの中身をコピペします。",
-  "psi_ex.spellpiece.piecetrick_castscroll": "コピー",
-  "psi_ex.spellpiece.piecetrick_castscroll.desc": "ストレージの中身をコピペします。"
+  "psi_ex.spellpiece.piecetrick_castscroll": "スクロール発動",
+  "psi_ex.spellpiece.piecetrick_castscroll.desc": "スクロールを発動します。",
+  "psi_ex.spellpiece.pieceselector_scrolldata": "アイテム取得",
+  "psi_ex.spellpiece.pieceselector_scrolldata.desc": "CADの隣にあるアイテムを取得します。"
 }
