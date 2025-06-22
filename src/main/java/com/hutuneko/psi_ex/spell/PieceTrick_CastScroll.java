@@ -1,19 +1,28 @@
 package com.hutuneko.psi_ex.spell;
 
+import com.mojang.authlib.GameProfile;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
 import io.redspace.ironsspellbooks.api.spells.SpellData;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamAny;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
+
+import java.util.UUID;
 
 public class PieceTrick_CastScroll extends PieceTrick {
     private ParamVector dirParam;
@@ -53,17 +62,33 @@ public class PieceTrick_CastScroll extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Player player = context.caster;
         Level world = player.level();
-        // サーバーサイドでのみ動かす
-        if (world.isClientSide) {
-            return null;
-        }
+        if (world.isClientSide) return null;
         ServerLevel sWorld = (ServerLevel) world;
 
-        // 1) 方向ベクトル
-        Vector3 v = getParamValue(context, dirParam);
-        Vec3 dir = new Vec3(v.x, v.y, v.z);
+        Vector3 vv = getParamValue(context, dirParam);
+        double ox = vv.x, oy = vv.y, oz = vv.z;
 
-        // 2) Selector から来たスクロールスタック
+        GameProfile prof = new GameProfile(UUID.randomUUID(), "psi_fake");
+        ServerPlayer fake = FakePlayerFactory.get(sWorld, prof);
+        fake.setPos(ox, oy, oz);
+        fake.setYRot(player.getYRot());
+        fake.setXRot(player.getXRot());
+        fake.setYHeadRot(player.getYHeadRot());
+        sWorld.addFreshEntity(fake);
+        long currentTick = sWorld.getGameTime();
+        long removeTick = currentTick + 20 * 10;
+
+        Object removalListener = new Object() {
+            @SubscribeEvent(priority = EventPriority.NORMAL)
+            public void onServerTick(TickEvent.ServerTickEvent evt) {
+                if (evt.phase == TickEvent.Phase.END && sWorld.getGameTime() >= removeTick) {
+                    if (fake.isAlive()) {
+                        fake.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                    MinecraftForge.EVENT_BUS.unregister(this);
+                }
+            }
+        };
         Object raw = getParamValue(context, dataParam);
         if (!(raw instanceof ItemStack scroll)) {
             throw new SpellRuntimeException("スクロールが渡されていません");
@@ -80,24 +105,25 @@ public class PieceTrick_CastScroll extends PieceTrick {
             throw new SpellRuntimeException("スクロールにスペルが入っていません");
         }
         ItemStack scrollCopy = scroll.copy();
-        // 4) 各 SpellData を取り出して attemptInitiateCast
+        fake.setInvulnerable(true);
+
         for (int i = 0; i < count; i++) {
             SpellData data = container.getSpellAtIndex(i);
             AbstractSpell spell = data.getSpell();
             int level = data.getLevel();
-
-            if (spell == null) {
-                continue;
-            }
+            if (spell == null) continue;
 
             spell.attemptInitiateCast(
-                    scrollCopy, level,
-                    sWorld, player,
-                    CastSource.SCROLL, true,
-                    "right"
+                    scrollCopy,
+                    level,
+                    sWorld,
+                    (ServerPlayer) fake,
+                    CastSource.SCROLL,
+                    true,
+                    "fake"
             );
         }
-
+        MinecraftForge.EVENT_BUS.register(removalListener);
         return null;
     }
 }

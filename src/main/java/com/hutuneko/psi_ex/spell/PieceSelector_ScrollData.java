@@ -31,13 +31,11 @@ public class PieceSelector_ScrollData extends PieceSelector {
     @Override
     public ItemStack execute(SpellContext context) throws SpellRuntimeException {
         Player player = context.caster;
-        // 今手に持っているアイテムを探す
         ItemStack held = player.getMainHandItem();
         if (held.isEmpty()) {
             throw new SpellRuntimeException("メインハンドにアイテムを持ってください");
         }
 
-        // インベントリを線形探索して、「held」のインデックスを見つける
         List<ItemStack> items = player.getInventory().items;
         int idx = -1;
         for (int i = 0; i < items.size(); i++) {
@@ -49,7 +47,6 @@ public class PieceSelector_ScrollData extends PieceSelector {
         if (idx < 0) {
             throw new SpellRuntimeException("インベントリに手持ちアイテムが見つかりません");
         }
-        // 右隣スロット (+1) を取得
         int right = idx + 1;
         if (right >= items.size()) {
             throw new SpellRuntimeException("右隣にアイテムがありません");

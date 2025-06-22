@@ -18,9 +18,6 @@ import java.util.Objects;
 
 public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
 
-//    SpellParam<Entity> targetParam;
-//    SpellParam<Number> indexParam;
-//    SpellParam<Number> valueParam;
     private ParamEntity targetParam;
     private ParamNumber indexParam;
     private ParamNumber valueParam;

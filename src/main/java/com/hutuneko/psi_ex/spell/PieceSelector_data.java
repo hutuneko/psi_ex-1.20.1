@@ -28,13 +28,11 @@ public class PieceSelector_data extends PieceSelector {
         }
         Player player = context.caster;
 
-        // 手に持っている storage アイテムを取得
         ItemStack stack = player.getMainHandItem();
         if (stack.isEmpty() || stack.getItem() != com.hutuneko.psi_ex.item.ModItems.STORAGE.get()) {
             throw new SpellRuntimeException("No storage item in hand");
         }
 
-        // ItemStorage ユーティリティで中身の ListTag をそのまま返す
         return ItemStorage.getStoredBlocks(stack);
     }
 
