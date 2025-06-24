@@ -1,6 +1,5 @@
 package com.hutuneko.psi_ex.spell.trick;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -50,7 +49,6 @@ public class PieceTrick_OffhandAttack extends PieceTrick {
         if (world.isClientSide) {
             return null;
         }
-        ServerLevel sWorld = (ServerLevel) world;
 
         Object raw = getParamValue(context, targetParam);
         if (!(raw instanceof LivingEntity target)) {
