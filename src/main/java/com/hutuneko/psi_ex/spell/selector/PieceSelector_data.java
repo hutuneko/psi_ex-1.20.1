@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.spell;
+package com.hutuneko.psi_ex.spell.selector;
 
 import com.hutuneko.psi_ex.item.ItemStorage;
 import net.minecraft.nbt.ListTag;

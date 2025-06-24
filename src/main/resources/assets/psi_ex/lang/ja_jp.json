@@ -10,5 +10,7 @@
   "psi_ex.spellpiece.piecetrick_castscroll": "スクロール発動",
   "psi_ex.spellpiece.piecetrick_castscroll.desc": "スクロールを発動します。",
   "psi_ex.spellpiece.pieceselector_scrolldata": "アイテム取得",
-  "psi_ex.spellpiece.pieceselector_scrolldata.desc": "CADの隣にあるアイテムを取得します。"
+  "psi_ex.spellpiece.pieceselector_scrolldata.desc": "CADの隣にあるアイテムを取得します。",
+  "psi_ex.spellpiece.piecetrick_offhandattack": "オフハンドアタック",
+  "psi_ex.spellpiece.piecetrick_offhandattack.desc": "オフハンドの武器で攻撃します。"
 }

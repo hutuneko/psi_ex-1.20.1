@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.spell;
+package com.hutuneko.psi_ex.spell.trick;
 
 import com.mojang.authlib.GameProfile;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
@@ -94,7 +94,6 @@ public class PieceTrick_CastScroll extends PieceTrick {
             throw new SpellRuntimeException("スクロールが渡されていません");
         }
 
-        // 3) Iron のスクロールかチェック
         if (!ISpellContainer.isSpellContainer(scroll)) {
             throw new SpellRuntimeException("これは Iron のスクロールではありません");
         }

@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.spell;
+package com.hutuneko.psi_ex.spell.trick;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.spell;
+package com.hutuneko.psi_ex.spell.trick;
 
 import com.hutuneko.psi_ex.PsiEX;
 import net.minecraft.network.chat.Component;
@@ -50,8 +50,9 @@ public class PieceTrick_coordinate_eidos_renewal extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        meta.addStat(EnumSpellStat.POTENCY, 50);
-        meta.addStat(EnumSpellStat.COST,    100);
+        int int_MAX = 2147483647;
+        meta.addStat(EnumSpellStat.POTENCY, int_MAX);
+        meta.addStat(EnumSpellStat.COST, int_MAX);
     }
 
     @Override

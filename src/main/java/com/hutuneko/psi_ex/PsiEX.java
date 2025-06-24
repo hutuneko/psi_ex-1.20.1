@@ -1,7 +1,9 @@
 package com.hutuneko.psi_ex;
 
 import com.hutuneko.psi_ex.item.ModItems;
-import com.hutuneko.psi_ex.spell.*;
+import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
+import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
+import com.hutuneko.psi_ex.spell.trick.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -58,6 +60,8 @@ public class PsiEX {
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal"), PieceTrick_coordinate_eidos_renewal.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_castscroll"), PieceTrick_CastScroll.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
+
         });
     }
 }
