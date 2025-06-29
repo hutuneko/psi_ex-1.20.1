@@ -14,7 +14,6 @@ public class ParamCompoundTag extends SpellParam {
     public static final ResourceLocation ID = new ResourceLocation("psi_ex", "compound_tag");
     public static final ParamCompoundTag TAG_PARAM = new ParamCompoundTag("psi_ex:compound_tag");
 
-    /** コンストラクタ：第1引数にパラメータ名 */
     public ParamCompoundTag(String name) {
         super(name, SpellParam.CYAN, false);
     }
