@@ -1,5 +1,6 @@
 package com.hutuneko.psi_ex.spell.selector;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import vazkii.psi.api.spell.Spell;
@@ -22,12 +23,12 @@ public class PieceSelector_ScrollData extends PieceSelector {
     }
 
     @Override
-    public Class<ItemStack> getEvaluationType() {
-        return ItemStack.class;
+    public Class<CompoundTag> getEvaluationType() {
+        return CompoundTag.class;
     }
 
     @Override
-    public ItemStack execute(SpellContext context) throws SpellRuntimeException {
+    public CompoundTag execute(SpellContext context) throws SpellRuntimeException {
         Player player = context.caster;
         ItemStack held = player.getMainHandItem();
         if (held.isEmpty()) {
@@ -48,7 +49,7 @@ public class PieceSelector_ScrollData extends PieceSelector {
         if (neighbor.isEmpty()) {
             throw new SpellRuntimeException("右隣のアイテムが空です");
         }
-        return neighbor;
+        return neighbor.getOrCreateTag();
     }
 
 }

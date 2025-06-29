@@ -29,7 +29,6 @@ public class PsiEX {
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::registerSpellPieces);
         ModItems.register(modBus);
-
     }
 
     public static List<String> listAllAttributeNames() {
@@ -50,7 +49,6 @@ public class PsiEX {
             Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
         }
     }
-
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         LOGGER.info("🔧 registerSpellPieces が呼ばれました");
         event.enqueueWork(() -> {
@@ -61,7 +59,7 @@ public class PsiEX {
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_castscroll"), PieceTrick_CastScroll.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
-
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_arsscrollcast"), PieceTrick_ArsScrollCast.class);
         });
     }
 }

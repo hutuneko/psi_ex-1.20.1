@@ -13,6 +13,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> STORAGE = ITEMS.register("storage",
             () -> new ItemStorage(new Item.Properties()));
+    public static final RegistryObject<Item> CAST_SCROLL = ITEMS.register("cast_scroll",
+            () -> new Item(new Item.Properties())
+    );
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

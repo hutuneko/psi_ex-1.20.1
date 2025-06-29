@@ -44,7 +44,7 @@ authors="${mod_authors}" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''${mod_description}'''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.psiex]] #optional
+[[dependencies.psi_ex]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
     # Does this dependency have to exist - if not, ordering below must be specified
@@ -58,7 +58,7 @@ description='''${mod_description}'''
     # Side this dependency is applied on - BOTH, CLIENT, or SERVER
     side="BOTH"
 # Here's another dependency
-[[dependencies.psiex]]
+[[dependencies.psi_ex]]
     modId="minecraft"
     mandatory=true
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
@@ -77,6 +77,13 @@ side="BOTH"
 modId="irons_spellbooks"
 mandatory=true
 versionRange="[1.20.1-3.4.0.9,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.psi_ex]]
+modId="ars_nouveau"           # Ars Nouveau 本体に依存
+mandatory=true
+versionRange="[1.20.1,)"
 ordering="AFTER"
 side="BOTH"
 # Features are specific properties of the game environment, that you may want to declare you require. This example declares
