@@ -217,10 +217,9 @@ minecraft {
 
 repositories {
     maven { url "https://cursemaven.com" }
+    maven { url = "https://api.modrinth.com/maven"}
 }
-
 dependencies {
-    // Forge本体
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
         implementation fg.deobf("curse.maven:psi-241665:6472034")
         implementation fg.deobf("curse.maven:patchouli-306770:4892162")
@@ -229,9 +228,11 @@ dependencies {
         implementation fg.deobf("curse.maven:geckolib-388172:6658942")
         implementation fg.deobf("curse.maven:playeranimator-658587:4587214")
         implementation fg.deobf("curse.maven:caelus-308989:5281700")
-        implementation  fg.deobf("curse.maven:ars-nouveau-401955:6688854")
+        implementation fg.deobf("curse.maven:ars-nouveau-401955:6688854")
+        implementation fg.deobf("maven.modrinth:cc-tweaked:1.116.0")
+        implementation fg.deobf("curse.maven:botania-225643:6366547")
+        implementation fg.deobf("curse.maven:moffs-addonapi-dynload-1242459:6420515")
 }
-
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17

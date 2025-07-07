@@ -1,5 +1,5 @@
 package com.hutuneko.psi_ex;
-
+import com.hutuneko.psi_ex.compat.CompatModule;
 import com.hutuneko.psi_ex.item.ModItems;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
@@ -22,13 +22,15 @@ import java.util.List;
 public class PsiEX {
 
     public static final String MOD_ID = "psi_ex";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public PsiEX() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::registerSpellPieces);
         ModItems.register(modBus);
+        CompatModule provider = new CompatModule();
+        provider.registerRawModules();
     }
 
     public static List<String> listAllAttributeNames() {
@@ -57,9 +59,7 @@ public class PsiEX {
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal"), eidos_renewal.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal"), PieceTrick_coordinate_eidos_renewal.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_castscroll"), PieceTrick_CastScroll.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_arsscrollcast"), PieceTrick_ArsScrollCast.class);
         });
     }
-}
+    }

@@ -4,7 +4,7 @@ import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.api.util.CasterUtil;
 import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
 import com.mojang.authlib.GameProfile;
-import com.hutuneko.psi_ex.ParamCompoundTag;
+import com.hutuneko.psi_ex.system.ParamCompoundTag;
 import com.hutuneko.psi_ex.item.ModItems;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

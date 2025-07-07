@@ -1,5 +1,6 @@
-package com.hutuneko.psi_ex;
+package com.hutuneko.psi_ex.system;
 
+import com.hutuneko.psi_ex.PsiEX;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;

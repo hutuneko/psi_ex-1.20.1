@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex;
+package com.hutuneko.psi_ex.system;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
