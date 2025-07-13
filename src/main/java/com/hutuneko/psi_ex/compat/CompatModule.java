@@ -11,18 +11,15 @@ public class CompatModule extends AddonModuleProvider {
         addRawModule(new ResourceLocation(PsiEX.MOD_ID, "botaniacompat"),
                 "Botania Compat",
                 BotaniaCompatModule.class,
-                new String[] { "psi", "botania" },
-                true);
+                new String[] { "psi", "botania" });
         addRawModule(new ResourceLocation(PsiEX.MOD_ID, "arscompat"),
                 "Ars Nouveau Compat",
                 ArsCompatModule.class,
-                new String[] { "psi", "ars_nouveau" },
-                true);
+                new String[] { "psi", "ars_nouveau" });
         addRawModule(new ResourceLocation(PsiEX.MOD_ID, "ironscompat"),
                 "Iron's Compat",
                 IronsCompatModule.class,
-                new String[] { "psi", "irons_spellbooks" },
-                true);
+                new String[] { "psi", "irons_spellbooks" });
     }
     @Override
     public String getModId() {

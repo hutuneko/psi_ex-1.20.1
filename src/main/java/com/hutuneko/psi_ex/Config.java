@@ -1,10 +1,14 @@
 package com.hutuneko.psi_ex;
 
+import com.hutuneko.psi_ex.compat.CompatModule;
+import moffy.addonapi.AddonModuleRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -12,52 +16,75 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Forge's config APIs
+/**
+ * Updated configuration class, modeled after TicEXConfig.
+ */
 @Mod.EventBusSubscriber(modid = PsiEX.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class Config
-{
-    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+public class Config {
+    public static ForgeConfigSpec.BooleanValue LOG_DIRT_BLOCK;
+    public static ForgeConfigSpec.IntValue MAGIC_NUMBER;
+    public static ForgeConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS;
+    public static ForgeConfigSpec.BooleanValue USE_SHADER;
 
-    private static final ForgeConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
-            .comment("Whether to log the dirt block on common setup")
-            .define("logDirtBlock", true);
-
-    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
-
-    public static final ForgeConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
-
-    // a list of strings that are treated as resource locations for items
-    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
-
-    static final ForgeConfigSpec SPEC = BUILDER.build();
+    public static ForgeConfigSpec COMMON_SPEC;
+    public static ForgeConfigSpec CLIENT_SPEC;
 
     public static boolean logDirtBlock;
     public static int magicNumber;
     public static String magicNumberIntroduction;
     public static Set<Item> items;
+    public static boolean useShader;
 
-    private static boolean validateItemName(final Object obj)
-    {
-        return obj instanceof final String itemName && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(itemName));
+    public static void registerConfig() {
+        final ForgeConfigSpec.Builder COMMON = new ForgeConfigSpec.Builder();
+        ForgeConfigSpec.Builder CLIENT = new ForgeConfigSpec.Builder();
+
+        // General settings
+        COMMON.comment("General settings").push("general");
+        LOG_DIRT_BLOCK = COMMON
+                .comment("Whether to log the dirt block on common setup")
+                .define("logDirtBlock", true);
+        MAGIC_NUMBER = COMMON
+                .comment("A magic number")
+                .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+        MAGIC_NUMBER_INTRODUCTION = COMMON
+                .comment("Introduction message for the magic number")
+                .define("magicNumberIntroduction", "The magic number is...");
+        ITEM_STRINGS = COMMON
+                .comment("A list of items to log on common setup.")
+                .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
+        COMMON.pop();
+
+        CLIENT.comment("Client settings").push("client");
+        USE_SHADER = CLIENT
+                .comment("Enable shader rendering for special effects")
+                .define("useShader", true);
+        CLIENT.pop();
+
+        COMMON_SPEC = COMMON.build();
+        CLIENT_SPEC = CLIENT.build();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_SPEC);
+        AddonModuleRegistry.INSTANCE.LoadModule(new CompatModule(), COMMON);
+    }
+
+    private static boolean validateItemName(final Object obj) {
+        return obj instanceof String name && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(name));
     }
 
     @SubscribeEvent
-    static void onLoad(final ModConfigEvent event)
-    {
-        logDirtBlock = LOG_DIRT_BLOCK.get();
-        magicNumber = MAGIC_NUMBER.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
-
-        // convert the list of strings into a set of items
-        items = ITEM_STRINGS.get().stream()
-                .map(itemName -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemName)))
-                .collect(Collectors.toSet());
+    public static void onLoad(final ModConfigEvent event) {
+        if (event.getConfig().getSpec() == COMMON_SPEC) {
+            logDirtBlock = LOG_DIRT_BLOCK.get();
+            magicNumber = MAGIC_NUMBER.get();
+            magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+            items = ITEM_STRINGS.get().stream()
+                    .map(name -> ForgeRegistries.ITEMS.getValue(new ResourceLocation(name)))
+                    .collect(Collectors.toSet());
+        } else if (event.getConfig().getSpec() == CLIENT_SPEC) {
+            useShader = USE_SHADER.get();
+        }
     }
 }

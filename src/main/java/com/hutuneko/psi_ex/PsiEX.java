@@ -20,25 +20,15 @@ import java.util.List;
 
 @Mod(PsiEX.MOD_ID)
 public class PsiEX {
-
     public static final String MOD_ID = "psi_ex";
-    public static final Logger LOGGER = LogUtils.getLogger();
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public PsiEX() {
+        Config.registerConfig();
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
         modBus.addListener(this::registerSpellPieces);
         ModItems.register(modBus);
-        CompatModule provider = new CompatModule();
-        provider.registerRawModules();
-    }
-
-    public static List<String> listAllAttributeNames() {
-        List<String> names = new ArrayList<>();
-        for (ResourceLocation rl : ForgeRegistries.ATTRIBUTES.getKeys()) {
-            names.add(rl.toString());
-        }
-        return names;
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -50,7 +40,12 @@ public class PsiEX {
         if (Config.items != null) {
             Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
         }
+
+        // 互換モジュールを手動で登録
+        CompatModule compat = new CompatModule();
+        compat.registerRawModules();
     }
+
     private void registerSpellPieces(final FMLCommonSetupEvent event) {
         LOGGER.info("🔧 registerSpellPieces が呼ばれました");
         event.enqueueWork(() -> {
@@ -60,6 +55,15 @@ public class PsiEX {
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal"), PieceTrick_coordinate_eidos_renewal.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
             PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
+            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_oredouble"), PieceTrick_OreDouble.class);
         });
     }
+
+    public static List<String> listAllAttributeNames() {
+        List<String> names = new ArrayList<>();
+        for (ResourceLocation rl : ForgeRegistries.ATTRIBUTES.getKeys()) {
+            names.add(rl.toString());
+        }
+        return names;
     }
+}

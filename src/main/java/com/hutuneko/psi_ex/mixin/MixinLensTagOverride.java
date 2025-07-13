@@ -16,12 +16,9 @@ public class MixinLensTagOverride {
     @Unique
     private static final ResourceLocation CUSTOM_LENS_TAG = new ResourceLocation("psi_ex", "manalens");
 
-    // ManaSpreaderBlockEntity.isValidLens と ManaBlasterItem.isValidLens 内の ItemStack.is(tag) 呼び出しを横取り
     @Unique
     private static boolean psi_ex_1_20_1$redirectIsLensTag(ItemStack stack, ResourceLocation origTag) {
-        // まず自作タグをチェック
         if (stack.is((Predicate<Holder<Item>>) CUSTOM_LENS_TAG)) return true;
-        // それ以外は元のタグ判定を継続
         return stack.is((Predicate<Holder<Item>>) origTag);
     }
 }
