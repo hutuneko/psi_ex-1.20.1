@@ -40,10 +40,6 @@ public class PsiEX {
         if (Config.items != null) {
             Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
         }
-
-        // 互換モジュールを手動で登録
-        CompatModule compat = new CompatModule();
-        compat.registerRawModules();
     }
 
     private void registerSpellPieces(final FMLCommonSetupEvent event) {

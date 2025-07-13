@@ -48,9 +48,8 @@ public class PieceTrick_OreDouble extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        int b = this.getParamEvaluation(doudleParam);
         meta.addStat(EnumSpellStat.POTENCY, 20);
-        meta.addStat(EnumSpellStat.COST, 50 * (b * b));
+        meta.addStat(EnumSpellStat.COST, 50 * 555);
     }
 
     @Override
@@ -75,14 +74,14 @@ public class PieceTrick_OreDouble extends PieceTrick {
         ServerLevel server = (ServerLevel) level;
         System.out.println(state.getTags());
         if (item.is(Tags.Items.ORES)) {
+            Number nraw = this.getParamValue(context, doudleParam);
+            int n = nraw.intValue();
+            for (int i = 0; i < n; i++) {
             LootParams.Builder lootBuilder = new LootParams.Builder(server)
                     .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
                     .withOptionalParameter(LootContextParams.TOOL, player.getMainHandItem());
 
             List<ItemStack> drops = state.getDrops(lootBuilder);
-            Number nraw = this.getParamValue(context, doudleParam);
-            int n = nraw.intValue();
-            for (int i = 0; i < n; i++) {
                 for (ItemStack drop : drops) {
                     double x = pos.getX() + 0.5;
                     double y = pos.getY() + 0.5;
@@ -92,7 +91,6 @@ public class PieceTrick_OreDouble extends PieceTrick {
                         server.addFreshEntity(ent);
                 }
             }
-
             level.destroyBlock(pos,false);
         }else{
             throw new SpellRuntimeException("鉱石ではありません。");
