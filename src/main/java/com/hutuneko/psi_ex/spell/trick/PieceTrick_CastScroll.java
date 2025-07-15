@@ -1,5 +1,6 @@
 package com.hutuneko.psi_ex.spell.trick;
 
+import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.system.ParamCompoundTag;
 import com.hutuneko.psi_ex.item.ModItems;
 import com.mojang.authlib.GameProfile;
@@ -94,7 +95,7 @@ public class PieceTrick_CastScroll extends PieceTrick {
             }
         };
 
-        Item scrollItem = ModItems.CAST_SCROLL.get();
+        Item scrollItem = PsiEXRegistry.CAST_SCROLL.get();
         ItemStack scrollStack = new ItemStack(scrollItem);
         CompoundTag scrollTag = (CompoundTag) getParamValue(context, dataParam);
         scrollStack.setTag(scrollTag);

@@ -8,6 +8,10 @@ import net.minecraft.resources.ResourceLocation;
 public class CompatModule extends AddonModuleProvider {
     @Override
     public void registerRawModules() {
+        addRawModule(new ResourceLocation(PsiEX.MOD_ID, "defaultcompatmodule"),
+        "Default Compat",
+                DefaultCompatModule.class,
+                new String[] { "psi", PsiEX.MOD_ID});
         addRawModule(new ResourceLocation(PsiEX.MOD_ID, "botaniacompat"),
                 "Botania Compat",
                 BotaniaCompatModule.class,

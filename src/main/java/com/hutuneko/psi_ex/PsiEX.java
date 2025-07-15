@@ -27,8 +27,7 @@ public class PsiEX {
         Config.registerConfig();
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::registerSpellPieces);
-        ModItems.register(modBus);
+//        ModItems.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -42,18 +41,7 @@ public class PsiEX {
         }
     }
 
-    private void registerSpellPieces(final FMLCommonSetupEvent event) {
-        LOGGER.info("🔧 registerSpellPieces が呼ばれました");
-        event.enqueueWork(() -> {
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_data"), PieceSelector_data.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "copy"), PieceTrick_copy.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "eidos_renewal"), eidos_renewal.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "coordinate_eidos_renewal"), PieceTrick_coordinate_eidos_renewal.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
-            PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_oredouble"), PieceTrick_OreDouble.class);
-        });
-    }
+
 
     public static List<String> listAllAttributeNames() {
         List<String> names = new ArrayList<>();

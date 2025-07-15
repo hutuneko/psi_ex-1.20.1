@@ -3,6 +3,7 @@ package com.hutuneko.psi_ex.spell.trick;
 import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.api.util.CasterUtil;
 import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
+import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.mojang.authlib.GameProfile;
 import com.hutuneko.psi_ex.system.ParamCompoundTag;
 import com.hutuneko.psi_ex.item.ModItems;
@@ -60,7 +61,7 @@ public class PieceTrick_ArsScrollCast extends PieceTrick {
         ServerLevel world = (ServerLevel) player.level();
 
         CompoundTag tag = (CompoundTag) getParamValue(psiCtx, parchmentParam);
-        ItemStack parchmentStack = new ItemStack(ModItems.CAST_SCROLL.get());
+        ItemStack parchmentStack = new ItemStack(PsiEXRegistry.CAST_SCROLL.get());
         parchmentStack.setTag(tag);
         if (parchmentStack.isEmpty()) {
             throw new SpellRuntimeException("NBTから復元した羊皮紙が無効です");

@@ -1,5 +1,6 @@
 package com.hutuneko.psi_ex.spell.selector;
 
+import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.item.ItemStorage;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +30,7 @@ public class PieceSelector_data extends PieceSelector {
         Player player = context.caster;
 
         ItemStack stack = player.getMainHandItem();
-        if (stack.isEmpty() || stack.getItem() != com.hutuneko.psi_ex.item.ModItems.STORAGE.get()) {
+        if (stack.isEmpty() || stack.getItem() != PsiEXRegistry.STORAGE.get()) {
             throw new SpellRuntimeException("No storage item in hand");
         }
 
