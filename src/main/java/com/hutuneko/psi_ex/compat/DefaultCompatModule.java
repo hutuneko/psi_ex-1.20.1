@@ -1,12 +1,17 @@
 package com.hutuneko.psi_ex.compat;
 
 import com.hutuneko.psi_ex.PsiEX;
+import com.hutuneko.psi_ex.entity.PsiArrowEntity;
 import com.hutuneko.psi_ex.item.ItemStorage;
+import com.hutuneko.psi_ex.item.Itemtestbullet;
+import com.hutuneko.psi_ex.item.PsiArrowItem;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
 import com.hutuneko.psi_ex.spell.trick.*;
 import moffy.addonapi.AddonModule;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import vazkii.psi.api.PsiAPI;
 
@@ -19,12 +24,25 @@ public class DefaultCompatModule extends AddonModule {
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_scrolldata"), PieceSelector_ScrollData.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_oredouble"), PieceTrick_OreDouble.class);
-        //ここから上は登録できる。
+        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_ejection"), PieceTrick_Ejection.class);
+
         PsiEXRegistry.STORAGE = PsiEXRegistry.ITEMS.register("storage", () ->
                 new ItemStorage(new Item.Properties().stacksTo(1))
         );
         PsiEXRegistry.CAST_SCROLL = PsiEXRegistry.ITEMS.register("cast_scroll", () ->
-                new Item(new Item.Properties())
+                new Item(new Item.Properties().stacksTo(1))
         );
+        PsiEXRegistry.TESTBULLET = PsiEXRegistry.ITEMS.register("test_bullet", () ->
+                new Itemtestbullet(new Item.Properties().stacksTo(1))
+        );
+        PsiEXRegistry.PSI_ARROW = PsiEXRegistry.ITEMS.register("psi_arrow", () ->
+                new PsiArrowItem(new Item.Properties()));
+
+        PsiEXRegistry.PSI_ARROW_ENTITY = PsiEXRegistry.ENTITIES.register("psi_arrow_entity", () ->
+                EntityType.Builder.<PsiArrowEntity>of(PsiArrowEntity::new, MobCategory.MISC)
+                        .sized(0.5F, 0.5F)
+                        .clientTrackingRange(4)
+                        .updateInterval(20)
+                        .build("psi_arrow_entity"));
     }
 }

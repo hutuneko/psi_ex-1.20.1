@@ -1,10 +1,7 @@
 package com.hutuneko.psi_ex;
-import com.hutuneko.psi_ex.compat.CompatModule;
-import com.hutuneko.psi_ex.item.ModItems;
-import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
-import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
-import com.hutuneko.psi_ex.spell.trick.*;
+import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.mojang.logging.LogUtils;
+import dan200.computercraft.api.ComputerCraftAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,7 +10,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-import vazkii.psi.api.PsiAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +18,17 @@ import java.util.List;
 public class PsiEX {
     public static final String MOD_ID = "psi_ex";
     private static final Logger LOGGER = LogUtils.getLogger();
-
     public PsiEX() {
         Config.registerConfig();
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
-//        ModItems.register(modBus);
+        PsiEXRegistry.ITEMS.register(modBus);
+        PsiEXRegistry.TYPES.register(modBus);
+        PsiEXRegistry.BLOCKS.register(modBus);
+        PsiEXRegistry.GASES.register(modBus);
+        PsiEXRegistry.SERIALIZERS.register(modBus);
+        PsiEXRegistry.BLOCK_ENTITIES.register(modBus);
+        PsiEXRegistry.ENTITIES.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

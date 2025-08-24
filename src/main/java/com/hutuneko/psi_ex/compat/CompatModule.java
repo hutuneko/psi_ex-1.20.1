@@ -24,6 +24,14 @@ public class CompatModule extends AddonModuleProvider {
                 "Iron's Compat",
                 IronsCompatModule.class,
                 new String[] { "psi", "irons_spellbooks" });
+        addRawModule(new ResourceLocation(PsiEX.MOD_ID, "mekcompat"),
+                "Mekanism Compat",
+                MekanismCompatModule.class,
+                new String[] { "psi", "mekanism" });
+        addRawModule(new ResourceLocation(PsiEX.MOD_ID, "curioscompat"),
+                "Curios Compat",
+                CuriosCompatModule.class,
+                new String[] { "psi", "curios" });
     }
     @Override
     public String getModId() {

@@ -1,6 +1,5 @@
 package com.hutuneko.psi_ex.mixin;
 
-import com.hutuneko.psi_ex.item.ModItems;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

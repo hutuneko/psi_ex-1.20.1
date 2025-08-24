@@ -55,8 +55,6 @@ public class ItemPsiManaLens extends LensItem {
             if (spell == null || !ISpellAcceptor.hasSpell(lens)) {
                 return shouldKill;
             }
-
-
             Player caster;
             Entity raw = burst.entity();
             if (raw instanceof ManaBurstEntity mbe && mbe.getOwner() instanceof Player p) {

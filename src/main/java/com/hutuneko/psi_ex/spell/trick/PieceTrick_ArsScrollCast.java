@@ -6,7 +6,6 @@ import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.mojang.authlib.GameProfile;
 import com.hutuneko.psi_ex.system.ParamCompoundTag;
-import com.hutuneko.psi_ex.item.ModItems;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

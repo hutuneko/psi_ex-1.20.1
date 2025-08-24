@@ -16,5 +16,12 @@
   "psi_ex.spellpiece.piecetrick_offhandattack": "オフハンドアタック",
   "psi_ex.spellpiece.piecetrick_offhandattack.desc": "オフハンドの武器で攻撃します。",
   "psi_ex.spellpiece.pieceselector_oredouble": "鉱石倍加",
-  "psi_ex.spellpiece.pieceselector_oredouble.desc": "鉱石を入力した数に応じて倍にします。"
+  "psi_ex.spellpiece.pieceselector_oredouble.desc": "鉱石を入力した数に応じて倍にします。",
+  "psi_ex.spellpiece.pieceselector_ejection": "発射",
+  "psi_ex.spellpiece.pieceselector_ejection.desc": "矢を発射だ！",
+  "psi_ex.spellpiece.pieceoperator_getspell": "術式取得",
+  "psi_ex.spellpiece.pieceoperator_getspell.desc": "キュリオススロットから取得するぞ！",
+  "psi_ex.spellpiece.piecetrick_executespell": "術式発射",
+  "psi_ex.spellpiece.pieceoperator_getspell.desc": "関数とはこういうことを言う",
+  "psi_ex.item.psi_arrow": "術式矢"
 }
