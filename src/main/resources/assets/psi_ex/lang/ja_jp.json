@@ -22,6 +22,6 @@
   "psi_ex.spellpiece.pieceoperator_getspell": "術式取得",
   "psi_ex.spellpiece.pieceoperator_getspell.desc": "キュリオススロットから取得するぞ！",
   "psi_ex.spellpiece.piecetrick_executespell": "術式発射",
-  "psi_ex.spellpiece.pieceoperator_getspell.desc": "関数とはこういうことを言う",
+  "psi_ex.spellpiece.piecetrick_executespell.desc": "関数とはこういうことを言う...かもしれない。",
   "psi_ex.item.psi_arrow": "術式矢"
 }

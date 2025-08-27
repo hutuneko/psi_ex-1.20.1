@@ -2,9 +2,13 @@ package com.hutuneko.psi_ex.compat;
 
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.entity.PsiArrowEntity;
+import com.hutuneko.psi_ex.entity.PsiBarrierEntity;
+import com.hutuneko.psi_ex.entity.PsiTestEntity;
 import mekanism.common.registration.impl.GasDeferredRegister;
 import mekanism.common.registration.impl.GasRegistryObject;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -29,6 +33,9 @@ public class PsiEXRegistry {
             DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, PsiEX.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, PsiEX.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> TABS =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB,PsiEX.MOD_ID);
+
 
     public static RegistryObject<Item> PSI_MANA_LENS = null;
     public static RegistryObject<Item> STORAGE = null;
@@ -40,5 +47,8 @@ public class PsiEXRegistry {
     public static GasRegistryObject PSI_GAS = null;
 
     public static RegistryObject<EntityType<PsiArrowEntity>> PSI_ARROW_ENTITY = null;
+    public static RegistryObject<EntityType<PsiBarrierEntity>> PSI_BRRIER_ENTITY = null;
+    public static RegistryObject<EntityType<PsiTestEntity>> PSI_TEST_ENTITY = null;
 
+    public static RegistryObject<CreativeModeTab> CREATIVE_TAB_ITEMS = null;
 }

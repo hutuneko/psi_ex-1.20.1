@@ -2,6 +2,8 @@ package com.hutuneko.psi_ex.system;
 
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.entity.PsiArrowRenderer;
+import com.hutuneko.psi_ex.entity.PsiBarrierRenderer;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,5 +17,8 @@ public class ClientSetup {
                 PsiEXRegistry.PSI_ARROW_ENTITY.get(),
                 PsiArrowRenderer::new
         );
+        e.registerEntityRenderer(PsiEXRegistry.PSI_BRRIER_ENTITY.get(), PsiBarrierRenderer::new);
+        e.registerEntityRenderer(PsiEXRegistry.PSI_TEST_ENTITY.get(),
+                ZombieRenderer::new);
     }
 }

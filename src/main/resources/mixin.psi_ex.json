@@ -2,6 +2,12 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.hutuneko.psi_ex.mixin",
-  "mixins": ["MixinCADStackHandler"],
-  "injectors": { "defaultRequire": 1 }
+  "plugin": "com.llamalad7.mixinextras.MixinExtrasBootstrap",
+  "refmap": "psi_ex.refmap.json",
+  "mixins": [
+    "MixinCADStackHandler",
+    "MixinLivingEntity"
+  ],
+  "injectors": {
+    "defaultRequire": 1 }
 }
