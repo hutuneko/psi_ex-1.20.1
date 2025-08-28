@@ -29,7 +29,8 @@ public class PieceTrick_ExecuteSpell extends PieceTrick {
         Spell spell = new Spell();
         spell.readFromNBT(v);
         SpellContext sc = new SpellContext().setSpell(spell).setPlayer(ctx.caster);
-        sc.cspell.safeExecute(sc);
+        CompiledSpell s = sc.cspell;
+        s.safeExecute(sc);
 
         return null;
     }

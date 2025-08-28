@@ -24,6 +24,7 @@ public class PsiBarrierEntity extends Entity {
             SynchedEntityData.defineId(PsiBarrierEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final long COOLDOWN_TICKS = 20L;
     private final Int2LongOpenHashMap lastHit = new Int2LongOpenHashMap();
+
     public PsiBarrierEntity(EntityType<? extends PsiBarrierEntity> type, Level level) {
         super(type, level);
         this.noPhysics = true;
@@ -101,8 +102,7 @@ public class PsiBarrierEntity extends Entity {
     }
     private boolean shouldAffect(Entity e) {
         if (e == this) return false;
-        if (!e.isAlive()) return false;
-        return true;
+        return e.isAlive();
     }
     @Override
     public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
