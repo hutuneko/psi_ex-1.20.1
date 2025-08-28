@@ -1,7 +1,8 @@
 package com.hutuneko.psi_ex;
+
+import com.hutuneko.psi_ex.cc.CCCCompatInit;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.mojang.logging.LogUtils;
-import dan200.computercraft.api.ComputerCraftAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,6 +33,7 @@ public class PsiEX {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(CCCCompatInit::init);
         LOGGER.info("HELLO FROM COMMON SETUP");
 
         if (Config.logDirtBlock)

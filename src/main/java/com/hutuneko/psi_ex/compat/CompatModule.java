@@ -32,6 +32,10 @@ public class CompatModule extends AddonModuleProvider {
                 "Curios Compat",
                 CuriosCompatModule.class,
                 new String[] { "psi", "curios" });
+        addRawModule(new ResourceLocation(PsiEX.MOD_ID, "ccccompat"),
+                "CCC Compat",
+                CCCuriosModule.class,
+                new String[] { "psi", "curios", "computercraft" });
     }
     @Override
     public String getModId() {

@@ -212,6 +212,9 @@ minecraft {
     runs {
         client {
             jvmArgs "-Dmixin.env.disableRefMap=true"
+            jvmArgs "-Dforge.logging.mojang.level=debug"
+            jvmArgs "-Dmixin.debug.export=true"
+
         }
     }
 }

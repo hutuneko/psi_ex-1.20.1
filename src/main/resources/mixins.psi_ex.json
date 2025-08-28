@@ -4,7 +4,6 @@
   "package": "com.hutuneko.psi_ex.mixin",
   "refmap": "psi_ex.refmap.json",
   "mixins": [
-    "MixinCADStackHandler",
     "MixinPsiSpellContext"
   ],
   "injectors": {

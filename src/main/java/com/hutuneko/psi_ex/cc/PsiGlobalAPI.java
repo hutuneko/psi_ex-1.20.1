@@ -4,15 +4,15 @@ package com.hutuneko.psi_ex.cc;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.system.CuriosUtil;
 import com.mojang.authlib.GameProfile;
+import dan200.computercraft.api.lua.ILuaAPI;
 import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.pocket.IPocketAccess;
+import dan200.computercraft.api.peripheral.IComputerAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotResult;
 import vazkii.psi.api.cad.ISocketable;
@@ -23,23 +23,31 @@ import vazkii.psi.api.spell.SpellContext;
 import java.util.Optional;
 import java.util.UUID;
 
-public class PsiPocketPeripheral implements IPeripheral {
-    private final IPocketAccess pocket;
+public class PsiGlobalAPI implements ILuaAPI {
+    private final IComputerAccess computer;
 
-    public PsiPocketPeripheral(IPocketAccess pocket) { this.pocket = pocket; }
+    public PsiGlobalAPI(IComputerAccess computer) {
+        this.computer = computer;
+    }
 
-    @NotNull @Override
-    public String getType() { return "psi_caster"; }
+    /** グローバルに生えるテーブル名（http や fs と同様に psi_ex.* で呼べる） */
+    @Override public String[] getNames() { return new String[]{"psi_ex"}; }
 
-    @Override
-    public boolean equals(@Nullable IPeripheral other) { return this == other; }
+    @LuaFunction(mainThread = true,value = "castCurioSpellAt")
+    public final Object[] castCurioSpellAt(String playerId, int socketIndex) {
+        return doCast(playerId, socketIndex, null, null, null);
+    }
 
-    @LuaFunction(mainThread = true)
-    public final Object[] castCurioSpell(String playerId, int socketIndex, @Nullable Double x, @Nullable Double y, @Nullable Double z) {
-        ServerLevel level = pocket.getLevel();
-        MinecraftServer server = level.getServer();
+    // 座標あり（別名にする）
+    @LuaFunction(mainThread = true,value = "castCurioSpellAtPos")
+    public final Object[] castCurioSpellAtPos(String playerId, int socketIndex,
+                                              double x, double y, double z) {
+        return doCast(playerId, socketIndex, x, y, z);
+    }
 
-        // プレイヤー解決（UUID優先、無理なら名前）
+    public Object[] doCast(String playerId, int socketIndex, Double x, Double y, Double z) {
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        ServerLevel level = server.overworld();
         ServerPlayer player = resolvePlayer(server, playerId);
         if (player == null) return new Object[]{ false, "player not found: " + playerId };
         Optional<SlotResult> found = CuriosUtil.findFirstByItem(player, PsiEXRegistry.PSI_CURIO_BULLET.get());
@@ -47,7 +55,6 @@ public class PsiPocketPeripheral implements IPeripheral {
 
         ItemStack curio = found.get().stack();
         final boolean hasAll = x != null && y != null && z != null;
-        // ISocketable 取得
         ISocketable sock = ISocketable.socketable(curio);
         if (sock == null) return new Object[]{ false, "no ISocketable capability on curio" };
 
@@ -76,11 +83,12 @@ public class PsiPocketPeripheral implements IPeripheral {
                 fake.setXRot(player.getXRot());
                 fake.setYHeadRot(player.getYHeadRot());
                 sc = new SpellContext().setSpell(s).setPlayer(fake);
+                System.out.println(1);
             }else {
                 sc = new SpellContext().setSpell(s).setPlayer(player);
             }
             sc.cspell.safeExecute(sc);
-            return new Object[]{ true, "cast ok" };
+            return new Object[]{ true, "ok" };
         } catch (Throwable t) {
             return new Object[]{ false, "cast failed: " + t.getMessage() };
         }
