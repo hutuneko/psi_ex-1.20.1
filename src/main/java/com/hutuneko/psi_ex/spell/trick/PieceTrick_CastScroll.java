@@ -1,6 +1,7 @@
 package com.hutuneko.psi_ex.spell.trick;
 
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
+import com.hutuneko.psi_ex.system.CopyPlayerInventory;
 import com.hutuneko.psi_ex.system.ParamCompoundTag;
 import com.mojang.authlib.GameProfile;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
@@ -35,7 +36,6 @@ public class PieceTrick_CastScroll extends PieceTrick {
         super(spell);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initParams() {
         addParam(dirParam = new ParamVector(SpellParam.GENERIC_NAME_VECTOR,SpellParam.RED,false,false
@@ -78,7 +78,7 @@ public class PieceTrick_CastScroll extends PieceTrick {
         fake.setYRot(player.getYRot());
         fake.setXRot(player.getXRot());
         fake.setYHeadRot(player.getYHeadRot());
-        sWorld.addFreshEntity(fake);
+        CopyPlayerInventory.copyInventory((ServerPlayer) player,fake);
         long currentTick = sWorld.getGameTime();
         long removeTick = currentTick + 20 * 10;
 
@@ -126,7 +126,7 @@ public class PieceTrick_CastScroll extends PieceTrick {
                     scrollCopy,
                     level,
                     sWorld,
-                    (ServerPlayer) fake,
+                    fake,
                     CastSource.SCROLL,
                     true,
                     "fake"

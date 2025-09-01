@@ -142,7 +142,12 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
+        jarJar.ranged(it, "[0.5.0,)")
+    }
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
@@ -214,7 +219,6 @@ minecraft {
             jvmArgs "-Dmixin.env.disableRefMap=true"
             jvmArgs "-Dforge.logging.mojang.level=debug"
             jvmArgs "-Dmixin.debug.export=true"
-
         }
     }
 }
@@ -266,7 +270,11 @@ dependencies {
         implementation fg.deobf(files("libs/psitweaks-0.0.1.jar"))
         annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     }
-
+mixin {
+    // MixinGradle Settings
+    add sourceSets.main, 'mixins.psi_ex.refmap.json'
+    config 'mixins.psi_ex.json'
+}
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17

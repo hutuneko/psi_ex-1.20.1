@@ -4,8 +4,6 @@ import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.entity.PsiBarrierEntity;
 import com.hutuneko.psi_ex.item.PsiCuriosbullet;
 import com.hutuneko.psi_ex.spell.operator.PieceOperator_getSpell;
-import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
-import com.hutuneko.psi_ex.spell.trick.PieceTrick_Ejection;
 import com.hutuneko.psi_ex.spell.trick.PieceTrick_ExecuteSpell;
 import com.hutuneko.psi_ex.spell.trick.PieceTrick_SummonBarrier;
 import moffy.addonapi.AddonModule;

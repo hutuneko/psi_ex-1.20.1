@@ -4,6 +4,7 @@ import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.api.util.CasterUtil;
 import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
+import com.hutuneko.psi_ex.system.CopyPlayerInventory;
 import com.mojang.authlib.GameProfile;
 import com.hutuneko.psi_ex.system.ParamCompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -80,7 +81,7 @@ public class PieceTrick_ArsScrollCast extends PieceTrick {
         fake.setPos(v.x, v.y, v.z);
         fake.setYRot(player.getYRot());
         fake.setXRot(player.getXRot());
-        world.addFreshEntity(fake);
+        CopyPlayerInventory.copyInventory((ServerPlayer) player,fake);
 
         com.hollingsworth.arsnouveau.api.spell.SpellContext arsCtx =
                 com.hollingsworth.arsnouveau.api.spell.SpellContext.fromEntity(

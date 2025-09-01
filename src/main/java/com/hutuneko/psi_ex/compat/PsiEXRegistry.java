@@ -49,6 +49,5 @@ public class PsiEXRegistry {
     public static RegistryObject<EntityType<PsiArrowEntity>> PSI_ARROW_ENTITY = null;
     public static RegistryObject<EntityType<PsiBarrierEntity>> PSI_BRRIER_ENTITY = null;
     public static RegistryObject<EntityType<PsiTestEntity>> PSI_TEST_ENTITY = null;
-
     public static RegistryObject<CreativeModeTab> CREATIVE_TAB_ITEMS = null;
 }

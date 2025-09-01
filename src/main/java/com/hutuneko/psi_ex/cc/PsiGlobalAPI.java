@@ -2,6 +2,7 @@
 package com.hutuneko.psi_ex.cc;
 
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
+import com.hutuneko.psi_ex.system.CopyPlayerInventory;
 import com.hutuneko.psi_ex.system.CuriosUtil;
 import com.mojang.authlib.GameProfile;
 import dan200.computercraft.api.lua.ILuaAPI;
@@ -82,6 +83,7 @@ public class PsiGlobalAPI implements ILuaAPI {
                 fake.setYRot(player.getYRot());
                 fake.setXRot(player.getXRot());
                 fake.setYHeadRot(player.getYHeadRot());
+                CopyPlayerInventory.copyInventory(player, fake);
                 sc = new SpellContext().setSpell(s).setPlayer(fake);
                 System.out.println(1);
             }else {
