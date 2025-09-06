@@ -44,6 +44,7 @@ public class PsiEXRegistry {
     public static RegistryObject<Item> PSI_ARROW = null;
     public static RegistryObject<Item> PSI_CURIO_BULLET = null;
     public static RegistryObject<Item> PSI_SPELLBOOK = null;
+    public static RegistryObject<Item> PSI_SPIRITS_EYE = null;
 
     public static GasRegistryObject PSI_GAS = null;
 

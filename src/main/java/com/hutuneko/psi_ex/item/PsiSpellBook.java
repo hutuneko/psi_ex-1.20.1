@@ -10,8 +10,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.PsiAPI;
+
+import javax.annotation.Nullable;
 
 public class PsiSpellBook extends SpellBook {
     private final int maxStackSize;
@@ -36,7 +37,6 @@ public class PsiSpellBook extends SpellBook {
                 s.setMaxSlots(maxStackSize);
             }
         });
-
         return provider;
     }
 }

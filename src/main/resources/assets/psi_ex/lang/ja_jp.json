@@ -25,5 +25,9 @@
   "psi_ex.spellpiece.piecetrick_executespell.desc": "関数とはこういうことを言う...かもしれない。",
   "psi_ex.spellpiece.piecetrick_summonbarrier": "防壁",
   "psi_ex.spellpiece.piecetrick_summonbarrier.desc": "防壁を作り出す",
-  "psi_ex.item.psi_arrow": "術式矢"
+  "psi_ex.item.psi_arrow": "術式矢",
+  "psi_ex.item.psi_curio_bullet": "術式弾入れ",
+  "psi_ex.item.psi_spellbook": "術式スペルブック"
+
+
 }
