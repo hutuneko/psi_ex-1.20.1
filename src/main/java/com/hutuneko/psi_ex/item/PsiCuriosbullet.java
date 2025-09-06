@@ -24,7 +24,7 @@ public class PsiCuriosbullet extends Item implements ICurioItem {
 
     @Override
     public boolean shouldOverrideMultiplayerNbt() {
-        return true;
+        return super.shouldOverrideMultiplayerNbt();
     }
 
     public boolean canEquipFromUse(net.minecraft.world.inventory.Slot slot, ItemStack stack, ItemStack curio) {

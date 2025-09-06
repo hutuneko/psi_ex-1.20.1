@@ -31,6 +31,10 @@ public class DefaultCompatModule extends AddonModule {
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_offhandattack"), PieceTrick_OffhandAttack.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_oredouble"), PieceTrick_OreDouble.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_ejection"), PieceTrick_Ejection.class);
+//        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceselector_seve_number"), PieceTrick_Seve_Number.class);
+//        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_seve_vectol3"), PieceTrick_Seve_Vector.class);
+//        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceoperator_getseve_vectol3"), PieceOperator_getSeve_Vector3.class);
+//        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceoperator_getseve_number"), PieceOperator_getSeve_Number.class);
 
         PsiEXRegistry.STORAGE = PsiEXRegistry.ITEMS.register("storage", () ->
                 new ItemStorage(new Item.Properties().stacksTo(1))

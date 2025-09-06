@@ -30,6 +30,7 @@ public class PsiEX {
         PsiEXRegistry.SERIALIZERS.register(modBus);
         PsiEXRegistry.BLOCK_ENTITIES.register(modBus);
         PsiEXRegistry.ENTITIES.register(modBus);
+        PsiEXRegistry.TABS.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

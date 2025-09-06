@@ -31,7 +31,6 @@ public class CopyPlayerInventory {
         // 選択中スロットも同期
         b.selected = a.selected;
 
-        // エンダーチェスト（必要なら）
         var se = src.getEnderChestInventory();
         var de = dst.getEnderChestInventory();
         for (int i = 0; i < de.getContainerSize(); i++) {

@@ -247,7 +247,7 @@ dependencies {
         implementation fg.deobf("curse.maven:caelus-308989:5281700")
         implementation fg.deobf("curse.maven:ars-nouveau-401955:6688854")
         implementation fg.deobf("maven.modrinth:cc-tweaked:1.116.0")
-        implementation fg.deobf("curse.maven:botania-225643:6366547")
+        implementation fg.deobf("curse.maven:botania-225643:6870713")
         implementation fg.deobf("curse.maven:moffs-addonapi-dynload-1242459:6420515")
         implementation fg.deobf("curse.maven:mekanism-268560:6552911")
         implementation fg.deobf("curse.maven:mekanism-generators-268566:6552914")
@@ -268,6 +268,8 @@ dependencies {
         implementation fg.deobf("curse.maven:apothic-attributes-898963:5634071")
         implementation fg.deobf("curse.maven:placebo-283644:6274231")
         implementation fg.deobf(files("libs/psitweaks-0.0.1.jar"))
+        implementation fg.deobf("curse.maven:mmmmmmmmmmmm-225738:6860192")
+        implementation fg.deobf("curse.maven:selene-499980:6935940")
         annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     }
 mixin {

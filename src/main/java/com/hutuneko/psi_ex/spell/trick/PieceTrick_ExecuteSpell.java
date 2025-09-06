@@ -25,7 +25,6 @@ public class PieceTrick_ExecuteSpell extends PieceTrick {
     @Override
     public Object execute(SpellContext ctx) throws SpellRuntimeException {
         CompoundTag v = (CompoundTag) this.getParamValue(ctx, spellParam);
-        System.out.println(v);
         Spell spell = new Spell();
         spell.readFromNBT(v);
         SpellContext sc = new SpellContext().setSpell(spell).setPlayer(ctx.caster);
