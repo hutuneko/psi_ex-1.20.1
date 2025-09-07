@@ -11,11 +11,11 @@ import vazkii.psi.api.spell.SpellContext;
 
 import java.util.Objects;
 
-public class eidos_renewal extends PieceTrick {
+public class PieceTrick_Eidos_renewal extends PieceTrick {
     private ParamEntity targetParam;
     private ParamNumber         valueParam;
 
-    public eidos_renewal(Spell spell) {
+    public PieceTrick_Eidos_renewal(Spell spell) {
         super(spell);
     }
 
