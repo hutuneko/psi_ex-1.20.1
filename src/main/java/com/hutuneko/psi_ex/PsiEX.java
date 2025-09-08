@@ -2,6 +2,7 @@ package com.hutuneko.psi_ex;
 
 import com.hutuneko.psi_ex.cc.CCCCompatInit;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
+import com.hutuneko.psi_ex.system.PsiEXAttributes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -31,6 +32,7 @@ public class PsiEX {
         PsiEXRegistry.BLOCK_ENTITIES.register(modBus);
         PsiEXRegistry.ENTITIES.register(modBus);
         PsiEXRegistry.TABS.register(modBus);
+        PsiEXAttributes.register(modBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
