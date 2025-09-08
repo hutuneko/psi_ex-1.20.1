@@ -1,6 +1,6 @@
 package com.hutuneko.psi_ex.spell.trick;
 
-import com.hutuneko.psi_ex.system.PlayerDataProvider;
+import com.hutuneko.psi_ex.system.capability.PlayerDataProvider;
 import net.minecraft.world.entity.player.Player;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;

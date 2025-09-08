@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.system;
+package com.hutuneko.psi_ex.system.capability;
 
 import com.hutuneko.psi_ex.item.PsiCuriosbullet;
 import net.minecraft.nbt.CompoundTag;

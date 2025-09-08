@@ -8,7 +8,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-// PsiEXAttributes.java
 public final class PsiEXAttributes {
     public static final DeferredRegister<Attribute> ATTRIBUTES =
             DeferredRegister.create(ForgeRegistries.ATTRIBUTES, PsiEX.MOD_ID);
@@ -18,6 +17,12 @@ public final class PsiEXAttributes {
                     () -> new RangedAttribute(
                             "attribute.name.psi_ex.psi_spell_range",
                             32.0D, 0.0D, 1024.0D
+                    ).setSyncable(true));
+    public static final RegistryObject<Attribute> PSI_PSION_POINT =
+            ATTRIBUTES.register("psi_psion_point",
+                    () -> new RangedAttribute(
+                            "attribute.name.psi_ex.psi_psion_point",
+                            100.0D, 0.0D, Double.MAX_VALUE
                     ).setSyncable(true));
     public static void register(IEventBus modBus) {
         ATTRIBUTES.register(modBus);

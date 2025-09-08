@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.system;
+package com.hutuneko.psi_ex.system.capability;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

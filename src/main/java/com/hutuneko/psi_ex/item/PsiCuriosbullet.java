@@ -1,6 +1,6 @@
 package com.hutuneko.psi_ex.item;
 
-import com.hutuneko.psi_ex.system.SocketableProvider;
+import com.hutuneko.psi_ex.system.capability.SocketableProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

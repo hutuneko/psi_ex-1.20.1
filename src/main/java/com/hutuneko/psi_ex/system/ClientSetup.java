@@ -3,9 +3,11 @@ package com.hutuneko.psi_ex.system;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.entity.PsiArrowRenderer;
 import com.hutuneko.psi_ex.entity.PsiBarrierRenderer;
+import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -20,5 +22,10 @@ public class ClientSetup {
         e.registerEntityRenderer(PsiEXRegistry.PSI_BRRIER_ENTITY.get(), PsiBarrierRenderer::new);
         e.registerEntityRenderer(PsiEXRegistry.PSI_TEST_ENTITY.get(),
                 ZombieRenderer::new);
+    }
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent e){
+        if (e.phase != TickEvent.Phase.END || e.player.level().isClientSide) return;
+        e.player.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.tickRegain(e.player));
     }
 }

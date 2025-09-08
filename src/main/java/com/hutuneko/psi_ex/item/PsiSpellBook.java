@@ -1,7 +1,7 @@
 package com.hutuneko.psi_ex.item;
 
-import com.hutuneko.psi_ex.system.SocketableProvider;
-import com.hutuneko.psi_ex.system.StackSocketable;
+import com.hutuneko.psi_ex.system.capability.SocketableProvider;
+import com.hutuneko.psi_ex.system.capability.StackSocketable;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.item.SpellBook;

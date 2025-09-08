@@ -1,4 +1,4 @@
-package com.hutuneko.psi_ex.system;
+package com.hutuneko.psi_ex.system.capability;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

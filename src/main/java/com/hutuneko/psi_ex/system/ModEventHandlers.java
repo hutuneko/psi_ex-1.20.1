@@ -12,5 +12,6 @@ public class ModEventHandlers {
     @SubscribeEvent
     public static void onEntityAttributeMod(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, PsiEXAttributes.PSI_SPELL_RANGE.get());
+        event.add(EntityType.PLAYER, PsiEXAttributes.PSI_PSION_POINT.get());
     }
 }
