@@ -57,8 +57,8 @@ public class PieceTrick_LunaStrike extends PieceTrick {
         target.getCapability(PsionProvider.CAP).ifPresent(now -> now.hurt(d));
         target.getCapability(PsionProvider.CAP).ifPresent(now -> k = now.getCurrent());
         target.getCapability(PsionProvider.CAP).ifPresent(now -> l = now.getCurrent() <= 0.0);
-        System.out.println(k);
-        System.out.println(l);
+        System.out.println(k); //結果0.0
+        System.out.println(l); //結果false
         return null;
     }
 }
