@@ -15,7 +15,6 @@ public abstract class MIxinPlayer {
     @Unique
     private double psi_ex_1_20_1$P;
 
-
     @ModifyReturnValue(method = "isDeadOrDying", at = @At("RETURN"))
     public boolean isDeadOrDying(boolean o){
         psi_ex_1_20_1$E.getCapability(PsionProvider.CAP).ifPresent(cap ->

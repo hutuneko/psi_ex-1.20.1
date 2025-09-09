@@ -3,10 +3,14 @@ package com.hutuneko.psi_ex.system;
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.item.PsiSpellBook;
+import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;
+import moffy.ticex.modules.general.TicEXRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +24,6 @@ import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = PsiEX.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SpellDamageListeners {
-
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public static void onSpellDamage(SpellDamageEvent e) {
         var level = e.getEntity().level();
@@ -52,6 +55,18 @@ public final class SpellDamageListeners {
     }
 
     private static boolean hasMySpecialSpellbook(Player p) {
-        return CuriosUtil.findFirstByItem(p, PsiEXRegistry.PSI_CURIO_BULLET.get()).isEmpty();
+        return CuriosUtil.findFirstByItem(p, PsiEXRegistry.PSI_CURIO_BULLET.get()).isEmpty() || CuriosUtil.findFirstByItem(p, TicEXRegistry.CATALYST_IRONS_SPELLBOOK.get()).isEmpty();
+    }
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent e){
+        if (e.phase != TickEvent.Phase.END || e.player.level().isClientSide) return;
+        e.player.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.tickRegain(e.player));
+    }
+    @SubscribeEvent
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        if (event.isWasDeath()) {
+            Player oldPlayer = event.getOriginal();
+            Player newPlayer = event.getEntity();
+        }
     }
 }
