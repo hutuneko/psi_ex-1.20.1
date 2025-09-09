@@ -7,7 +7,7 @@
     "minVersion": "0.5.0"
   },
   "mixins": [
-    "MIxinPlayer"
+    "MixinPlayer"
   ],
   "injectors": {
     "defaultRequire": 1

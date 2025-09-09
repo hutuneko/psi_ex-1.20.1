@@ -59,14 +59,15 @@ public final class SpellDamageListeners {
     }
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e){
-        if (e.phase != TickEvent.Phase.END || e.player.level().isClientSide) return;
-        e.player.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.tickRegain(e.player));
+//        if (e.phase != TickEvent.Phase.END || e.player.level().isClientSide) return;
+//        e.player.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.tickRegain(e.player));
     }
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
             Player oldPlayer = event.getOriginal();
             Player newPlayer = event.getEntity();
+            newPlayer.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.setCurrent(newPlayer.getAttributeValue(PsiEXAttributes.PSI_PSION_POINT.get())));
         }
     }
 }

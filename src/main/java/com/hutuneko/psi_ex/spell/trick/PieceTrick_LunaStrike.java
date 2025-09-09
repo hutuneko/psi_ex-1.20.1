@@ -2,7 +2,6 @@ package com.hutuneko.psi_ex.spell.trick;
 
 import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import vazkii.psi.api.spell.*;
@@ -13,7 +12,8 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 public class PieceTrick_LunaStrike extends PieceTrick {
     private ParamEntity targetParam;
     private ParamNumber damageParam;
-
+    private double k;
+    private boolean l;
     public PieceTrick_LunaStrike(Spell spell) {
         super(spell);
     }
@@ -51,10 +51,14 @@ public class PieceTrick_LunaStrike extends PieceTrick {
         Number n = getParamValue(context, damageParam);
         double d = n.doubleValue();
         Entity t = getParamValue(context, targetParam);
-        if (!(t instanceof LivingEntity target)){
+        if (!(t instanceof Player target)){
             throw new SpellRuntimeException("有効なターゲットを選択してください");
         }
-        target.getCapability(PsionProvider.CAP).ifPresent(now -> now.setCurrent(d));
+        target.getCapability(PsionProvider.CAP).ifPresent(now -> now.hurt(d));
+        target.getCapability(PsionProvider.CAP).ifPresent(now -> k = now.getCurrent());
+        target.getCapability(PsionProvider.CAP).ifPresent(now -> l = now.getCurrent() <= 0.0);
+        System.out.println(k);
+        System.out.println(l);
         return null;
     }
 }

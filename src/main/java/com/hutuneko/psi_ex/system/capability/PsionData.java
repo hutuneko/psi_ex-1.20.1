@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.Objects;
 
 public class PsionData implements IPsionData {
-    private double current = 0;
+    private double current = 100;
 
     @Override public double getCurrent(){ return current; }
     @Override public void setCurrent(double v){ current = Math.max(0, v); }
