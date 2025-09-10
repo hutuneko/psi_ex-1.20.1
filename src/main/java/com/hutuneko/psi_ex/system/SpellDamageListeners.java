@@ -67,7 +67,7 @@ public final class SpellDamageListeners {
         if (event.isWasDeath()) {
             Player oldPlayer = event.getOriginal();
             Player newPlayer = event.getEntity();
-            newPlayer.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.setCurrent(newPlayer.getAttributeValue(PsiEXAttributes.PSI_PSION_POINT.get())));
+            newPlayer.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.setPsion(newPlayer.getAttributeValue(PsiEXAttributes.PSI_PSION_POINT.get())));
         }
     }
 }

@@ -37,6 +37,6 @@ public class PsionProvider implements ICapabilityProvider, ICapabilitySerializab
     @SubscribeEvent
     public static void onClone(PlayerEvent.Clone e){
         e.getOriginal().getCapability(CAP).ifPresent(old ->
-                e.getEntity().getCapability(CAP).ifPresent(now -> now.setCurrent(old.getCurrent())));
+                e.getEntity().getCapability(CAP).ifPresent(now -> now.setPsion(old.getPsion())));
     }
 }

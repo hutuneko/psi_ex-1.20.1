@@ -22,7 +22,7 @@ public final class PsiEXAttributes {
             ATTRIBUTES.register("psi_psion_point",
                     () -> new RangedAttribute(
                             "attribute.name.psi_ex.psi_psion_point",
-                            100.0D, 0.0D, Double.MAX_VALUE
+                            100.0D, Double.MIN_VALUE, Double.MAX_VALUE
                     ).setSyncable(true));
     public static void register(IEventBus modBus) {
         ATTRIBUTES.register(modBus);

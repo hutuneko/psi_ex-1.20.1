@@ -7,20 +7,20 @@ import net.minecraft.world.entity.player.Player;
 import java.util.Objects;
 
 public class PsionData implements IPsionData {
-    private double current = 100;
+    private double psion = 100;
 
-    @Override public double getCurrent(){ return current; }
-    @Override public void setCurrent(double v){ current = Math.max(0, v); }
-    @Override public void add(double v){ current = Math.max(0, current + v); }
-    @Override public void hurt(double v){ current = Math.max(0, current - v); }
+    @Override public double getPsion(){ return psion; }
+    @Override public boolean isPsion(){ return psion <= 0.0; }
+    @Override public void setPsion(double v){ psion = v; }
+    @Override public void add(double v){ psion = psion + v; }
+    @Override public void hurt(double v){ psion = psion - v; }
 
     @Override public void tickRegain(Player p){
-        if (p.level().getGameTime() % 10 == 0) { // 0.5秒ごと
+        if (p.level().getGameTime() % 10 == 0) {
             double max = Objects.requireNonNull(p.getAttribute(PsiEXAttributes.PSI_PSION_POINT.get())).getValue();
-            if (current < max) current = Math.min(max, current + 1.0);
+            if (psion < max) psion = Math.min(max, psion + 1.0);
         }
     }
-
-    @Override public void save(CompoundTag tag){ tag.putDouble("cur", current); }
-    @Override public void load(CompoundTag tag){ current = tag.getDouble("cur"); }
+    @Override public void save(CompoundTag tag){ tag.putDouble("cur", psion); }
+    @Override public void load(CompoundTag tag){ psion = tag.getDouble("cur"); }
 }

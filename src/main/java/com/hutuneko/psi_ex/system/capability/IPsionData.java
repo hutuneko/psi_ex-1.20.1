@@ -4,8 +4,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 
 public interface IPsionData {
-    double getCurrent();
-    void setCurrent(double v);
+    double getPsion();
+    boolean isPsion();
+    void setPsion(double v);
     void add(double v);
     void hurt(double v);
     void tickRegain(Player p);

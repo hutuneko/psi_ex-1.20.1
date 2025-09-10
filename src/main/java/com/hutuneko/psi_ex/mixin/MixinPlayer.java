@@ -20,7 +20,7 @@ public abstract class MixinPlayer {
     public boolean isDeadOrDying(boolean o){
         if (!(psi_ex_1_20_1$E instanceof Player p)) return o;
         p.getCapability(PsionProvider.CAP).ifPresent(cap ->
-                psi_ex_1_20_1$P = cap.getCurrent() <= 0.0);
+                psi_ex_1_20_1$P = cap.getPsion() <= 0.0);
         return o || psi_ex_1_20_1$P;
     }
 }
