@@ -1,12 +1,15 @@
-package com.hutuneko.psi_ex.system;
+package com.hutuneko.psi_ex.api;
 
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.item.PsiSpellBook;
+import com.hutuneko.psi_ex.system.CuriosUtil;
+import com.hutuneko.psi_ex.system.PsiEXAttributes;
 import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;
 import moffy.ticex.modules.general.TicEXRegistry;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
@@ -46,11 +49,11 @@ public final class SpellDamageListeners {
         if (acc == null || !ISpellAcceptor.hasSpell(bullet)) return;
         Spell spell = acc.getSpell();
         Entity entity = e.getEntity();
-        System.out.println(entity);
-        SpellContext spellContext = new SpellContext()
-                .setSpell(spell)
-                .setPlayer(p)
-                .setFocalPoint(entity);
+        if (!(entity instanceof LivingEntity livingEntity)) return;
+        SpellContext spellContext = new SpellContext();
+        spellContext.attackedEntity = livingEntity;
+        spellContext.setSpell(spell).setPlayer(p);
+
         spellContext.cspell.safeExecute(spellContext);
     }
 

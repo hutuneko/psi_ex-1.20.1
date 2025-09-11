@@ -2,7 +2,7 @@
 package com.hutuneko.psi_ex.cc;
 
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
-import com.hutuneko.psi_ex.system.CopyPlayerInventory;
+import com.hutuneko.psi_ex.api.CopyPlayerInventory;
 import com.hutuneko.psi_ex.system.CuriosUtil;
 import com.mojang.authlib.GameProfile;
 import dan200.computercraft.api.lua.ILuaAPI;
