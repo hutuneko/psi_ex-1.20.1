@@ -1,0 +1,15 @@
+{
+  "all": [
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_acceleration_point", "value": 5000, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_weighting_point", "value": 500, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_movement_point", "value": 5000, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_vibration_point", "value": 500, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_convergence_point", "value": 5000, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_divergence_point", "value": 500, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_absorption_point", "value": 5000, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_emission_point", "value": 500, "mode": "TOTAL" },
+    { "type": "attribute_at_least", "attribute": "psi_ex:psi_ancientrites_point", "value": 500, "mode": "TOTAL" }
+  ],
+  "message": "psi_ex:psi_absorption_pointが5000.0必要です",
+  "piece": "psi_ex:coordinate_eidos_renewal"
+}
