@@ -2,10 +2,13 @@ package com.hutuneko.psi_ex.compat;
 
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.entity.PsiArrowEntity;
+import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
 import com.hutuneko.psi_ex.entity.PsiTestEntity;
+import com.hutuneko.psi_ex.item.ItemNeedleDart;
 import com.hutuneko.psi_ex.item.ItemStorage;
 import com.hutuneko.psi_ex.item.Itemtestbullet;
 import com.hutuneko.psi_ex.item.PsiArrowItem;
+import com.hutuneko.psi_ex.spell.operator.PieceOperator_getSeve_Number;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
 import com.hutuneko.psi_ex.spell.trick.*;
@@ -33,6 +36,10 @@ public class DefaultCompatModule extends AddonModule {
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_ejection"), PieceTrick_Ejection.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_lunastrike"), PieceTrick_LunaStrike.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceoperator_dirchange"), PieceTrick_DirChange.class);
+        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_seve_number"), PieceTrick_Seve_Number.class);
+        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceoperator_getseve_number"), PieceOperator_getSeve_Number.class);
+        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_poisonousbee"), PieceTrick_PoisonousBee.class);
+
 
         PsiEXRegistry.STORAGE = PsiEXRegistry.ITEMS.register("storage", () ->
                 new ItemStorage(new Item.Properties().stacksTo(1))
@@ -45,6 +52,9 @@ public class DefaultCompatModule extends AddonModule {
         );
         PsiEXRegistry.PSI_ARROW = PsiEXRegistry.ITEMS.register("psi_arrow", () ->
                 new PsiArrowItem(new Item.Properties()));
+        PsiEXRegistry.PSI_NEEDLE_DART = PsiEXRegistry.ITEMS.register("psi_needle", () ->
+                new ItemNeedleDart(new Item.Properties()));
+
 
         PsiEXRegistry.PSI_ARROW_ENTITY = PsiEXRegistry.ENTITIES.register("psi_arrow_entity", () ->
                 EntityType.Builder.<PsiArrowEntity>of(PsiArrowEntity::new, MobCategory.MISC)
@@ -52,6 +62,13 @@ public class DefaultCompatModule extends AddonModule {
                         .clientTrackingRange(4)
                         .updateInterval(20)
                         .build("psi_arrow_entity"));
+
+        PsiEXRegistry.PSI_NEEDLE_DARTENTITY = PsiEXRegistry.ENTITIES.register("psi_needle_dartentity", () ->
+                EntityType.Builder.<PsiNeedleDartEntity>of(PsiNeedleDartEntity::new, MobCategory.MISC)
+                        .sized(0.1F, 0.1F)
+                        .clientTrackingRange(4)
+                        .updateInterval(20)
+                        .build("psi_needle_dartentity"));
 
         PsiEXRegistry.PSI_TEST_ENTITY = PsiEXRegistry.ENTITIES.register("dummy_villager",
                 () -> EntityType.Builder.of(PsiTestEntity::new, MobCategory.MISC)
@@ -69,5 +86,9 @@ public class DefaultCompatModule extends AddonModule {
                         })
                         .build()
         );
+//        PsiEXRegistry.ATTRIBUTE_EDITOR = PsiEXRegistry.MENUS.register("attribute_editor", () ->
+//                        IForgeMenuType.create((windowId, inv, buf) ->
+//                        new AttributeEditorMenu(windowId, inv)
+//                ));
     }
 }

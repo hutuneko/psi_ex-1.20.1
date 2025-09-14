@@ -69,7 +69,6 @@ public class ItemPsiManaLens extends LensItem {
                     .setPlayer(caster)
                     .setSpell(spell);
             ctx.cspell.safeExecute(ctx);
-
             return shouldKill;
         }
 

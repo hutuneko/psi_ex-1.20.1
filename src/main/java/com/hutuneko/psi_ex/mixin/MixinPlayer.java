@@ -18,9 +18,9 @@ public abstract class MixinPlayer {
 
     @ModifyReturnValue(method = "isDeadOrDying", at = @At("RETURN"))
     public boolean isDeadOrDying(boolean o){
-        if (!(psi_ex_1_20_1$E instanceof Player p)) return o;
+        if (!(psi_ex_1_20_1$E instanceof Player p)) return o|| psi_ex_1_20_1$E.getPersistentData().getBoolean("psi_ex:death");
         p.getCapability(PsionProvider.CAP).ifPresent(cap ->
                 psi_ex_1_20_1$P = cap.getPsion() <= 0.0);
-        return o || psi_ex_1_20_1$P;
+        return o || psi_ex_1_20_1$P || p.getPersistentData().getBoolean("psi_ex:death");
     }
 }

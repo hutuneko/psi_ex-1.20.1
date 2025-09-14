@@ -5,6 +5,7 @@ import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.item.PsiSpellBook;
 import com.hutuneko.psi_ex.system.CuriosUtil;
 import com.hutuneko.psi_ex.system.PsiEXAttributes;
+import com.hutuneko.psi_ex.system.PsiPieceConditionReloadListener;
 import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;
 import moffy.ticex.modules.general.TicEXRegistry;
@@ -12,7 +13,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,7 +31,7 @@ import vazkii.psi.api.spell.SpellContext;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = PsiEX.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public final class SpellDamageListeners {
+public final class ForgeEventBus {
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
     public static void onSpellDamage(SpellDamageEvent e) {
         var level = e.getEntity().level();
@@ -72,5 +77,22 @@ public final class SpellDamageListeners {
             Player newPlayer = event.getEntity();
             newPlayer.getCapability(PsionProvider.CAP).ifPresent(cap -> cap.setPsion(newPlayer.getAttributeValue(PsiEXAttributes.PSI_PSION_POINT.get())));
         }
+    }
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void onChangeTarget(LivingChangeTargetEvent ev) {
+        if (ev.getNewTarget() instanceof FakePlayer) {
+            ev.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void onLivingAttack(LivingAttackEvent ev) {
+        if (ev.getEntity() instanceof FakePlayer) {
+            ev.setCanceled(true);
+        }
+    }
+    @SubscribeEvent
+    public static void onAddReloadListener(AddReloadListenerEvent event) {
+        event.addListener(new PsiPieceConditionReloadListener());
     }
 }

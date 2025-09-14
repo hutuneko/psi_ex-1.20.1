@@ -1,6 +1,7 @@
 package com.hutuneko.psi_ex.system;
 
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
+import com.hutuneko.psi_ex.entity.NeedleRenderer;
 import com.hutuneko.psi_ex.entity.PsiArrowRenderer;
 import com.hutuneko.psi_ex.entity.PsiBarrierRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
@@ -20,6 +21,7 @@ public class ClientSetup {
         e.registerEntityRenderer(PsiEXRegistry.PSI_BRRIER_ENTITY.get(), PsiBarrierRenderer::new);
         e.registerEntityRenderer(PsiEXRegistry.PSI_TEST_ENTITY.get(),
                 ZombieRenderer::new);
+        e.registerEntityRenderer(PsiEXRegistry.PSI_NEEDLE_DARTENTITY.get(),
+                NeedleRenderer::new);
     }
-
 }
