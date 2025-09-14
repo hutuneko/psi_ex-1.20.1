@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.hutuneko.psi_ex.mixin",
-  "refmap": "psi_ex.refmap.json",
+  "refmap": "mixins.psi_ex.refmap.json",
   "mixinextras": {
     "minVersion": "0.5.0"
   },

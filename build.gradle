@@ -228,7 +228,7 @@ tasks.withType(JavaCompile).configureEach {
 
 mixin {
     // MixinGradle Settings
-    add sourceSets.main, 'mixins.psi_ex.refmap.json'
+    add sourceSets.main, "mixins.psi_ex.refmap.json"
     config 'mixins.psi_ex.json'
 }
 repositories {

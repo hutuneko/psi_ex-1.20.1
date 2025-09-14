@@ -1,5 +1,6 @@
 package com.hutuneko.psi_ex.mixin;
 
+import com.hutuneko.psi_ex.Config;
 import com.hutuneko.psi_ex.system.PieceConditionRegistry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,16 +19,21 @@ public abstract class MixinCompiledSpellAction_Redirect {
     private void gate$redirectExecute(IPlayerData data, SpellContext ctx, CallbackInfo ci) {
         var id = ((AccessorSpellPiece) this.piece).getRegistryKey();
         var cond = PieceConditionRegistry.get(id).orElse(null);
-        if (cond != null) {
-
-            boolean ok;
-            try { ok = cond.test(ctx, piece); } catch (Throwable t) { ok = false; }
-            if (!ok) {
-                var msg = cond.failMessage();
-                if (msg != null && ctx != null && ctx.caster != null && !ctx.caster.level().isClientSide) {
-                    ctx.caster.sendSystemMessage(msg);
+        if (Config.COMMON.spellgeat.get()) {
+            if (cond != null) {
+                boolean ok;
+                try {
+                    ok = cond.test(ctx, piece);
+                } catch (Throwable t) {
+                    ok = false;
                 }
-                ci.cancel();
+                if (!ok) {
+                    var msg = cond.failMessage();
+                    if (msg != null && ctx != null && ctx.caster != null && !ctx.caster.level().isClientSide) {
+                        ctx.caster.sendSystemMessage(msg);
+                    }
+                    ci.cancel();
+                }
             }
         }
     }

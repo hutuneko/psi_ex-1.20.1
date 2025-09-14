@@ -5,6 +5,7 @@ import com.hutuneko.psi_ex.entity.PsiArrowEntity;
 import com.hutuneko.psi_ex.entity.PsiBarrierEntity;
 import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
 import com.hutuneko.psi_ex.entity.PsiTestEntity;
+import com.hutuneko.psi_ex.item.PsiArrowItem;
 import com.hutuneko.psi_ex.system.attribute.AttributeEditorMenu;
 import mekanism.common.registration.impl.GasDeferredRegister;
 import mekanism.common.registration.impl.GasRegistryObject;
@@ -48,7 +49,8 @@ public class PsiEXRegistry {
     public static RegistryObject<Item> STORAGE = null;
     public static RegistryObject<Item> CAST_SCROLL = null;
     public static RegistryObject<Item> TESTBULLET = null;
-    public static RegistryObject<Item> PSI_ARROW = null;
+    public static RegistryObject<Item> PSI_ARROW = ITEMS.register("psi_arrow", () ->
+            new PsiArrowItem(new Item.Properties()));
     public static RegistryObject<Item> PSI_CURIO_BULLET = null;
     public static RegistryObject<Item> PSI_SPELLBOOK = null;
     public static RegistryObject<Item> PSI_SPIRITS_EYE = null;

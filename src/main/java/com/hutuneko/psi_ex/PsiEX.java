@@ -5,9 +5,10 @@ import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.system.PsiEXAttributes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +22,7 @@ public class PsiEX {
     public static final String MOD_ID = "psi_ex";
     private static final Logger LOGGER = LogUtils.getLogger();
     public PsiEX() {
-        Config.registerConfig();
+
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::commonSetup);
         PsiEXRegistry.ITEMS.register(modBus);
@@ -33,18 +34,12 @@ public class PsiEX {
         PsiEXRegistry.ENTITIES.register(modBus);
         PsiEXRegistry.TABS.register(modBus);
         PsiEXAttributes.register(modBus);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(CCCCompatInit::init);
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        if (Config.items != null) {
-            Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-        }
     }
 
 

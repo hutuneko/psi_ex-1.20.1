@@ -3,7 +3,6 @@ package com.hutuneko.psi_ex.compat;
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.entity.PsiArrowEntity;
 import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
-import com.hutuneko.psi_ex.entity.PsiTestEntity;
 import com.hutuneko.psi_ex.item.ItemNeedleDart;
 import com.hutuneko.psi_ex.item.ItemStorage;
 import com.hutuneko.psi_ex.item.Itemtestbullet;
@@ -70,11 +69,11 @@ public class DefaultCompatModule extends AddonModule {
                         .updateInterval(20)
                         .build("psi_needle_dartentity"));
 
-        PsiEXRegistry.PSI_TEST_ENTITY = PsiEXRegistry.ENTITIES.register("dummy_villager",
-                () -> EntityType.Builder.of(PsiTestEntity::new, MobCategory.MISC)
-                        .sized(0.6f, 1.95f)      // 村人サイズ
-                        .clientTrackingRange(8)
-                        .build(new ResourceLocation(PsiEX.MOD_ID, "dummy_villager").toString()));
+//        PsiEXRegistry.PSI_TEST_ENTITY = PsiEXRegistry.ENTITIES.register("dummy_villager",
+//                () -> EntityType.Builder.of(PsiTestEntity::new, MobCategory.MISC)
+//                        .sized(0.6f, 1.95f)      // 村人サイズ
+//                        .clientTrackingRange(8)
+//                        .build(new ResourceLocation(PsiEX.MOD_ID, "dummy_villager").toString()));
         PsiEXRegistry.CREATIVE_TAB_ITEMS = PsiEXRegistry.TABS.register(PsiEX.MOD_ID, () ->
                 CreativeModeTab.builder()
                         .title(Component.translatable("itemGroup.tab." + PsiEX.MOD_ID))
