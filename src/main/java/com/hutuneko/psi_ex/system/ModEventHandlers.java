@@ -2,6 +2,7 @@ package com.hutuneko.psi_ex.system;
 
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.datagen.GenPsiPieceConditions;
+import com.hutuneko.psi_ex.system.attribute.PsiEXAttributes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;

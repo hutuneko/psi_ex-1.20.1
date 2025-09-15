@@ -4,7 +4,7 @@ import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
 import com.hutuneko.psi_ex.item.PsiSpellBook;
 import com.hutuneko.psi_ex.system.CuriosUtil;
-import com.hutuneko.psi_ex.system.PsiEXAttributes;
+import com.hutuneko.psi_ex.system.attribute.PsiEXAttributes;
 import com.hutuneko.psi_ex.system.PsiPieceConditionReloadListener;
 import com.hutuneko.psi_ex.system.capability.PsionProvider;
 import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;

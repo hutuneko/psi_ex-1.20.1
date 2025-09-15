@@ -1,7 +1,7 @@
 package com.hutuneko.psi_ex.datagen;
 
 import com.hutuneko.psi_ex.PsiEX;
-import com.hutuneko.psi_ex.system.PsiEXAttributes;
+import com.hutuneko.psi_ex.system.attribute.PsiEXAttributes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 

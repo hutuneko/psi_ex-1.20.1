@@ -1,6 +1,6 @@
 package com.hutuneko.psi_ex.system.capability;
 
-import com.hutuneko.psi_ex.system.PsiEXAttributes;
+import com.hutuneko.psi_ex.system.attribute.PsiEXAttributes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 

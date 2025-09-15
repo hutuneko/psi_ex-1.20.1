@@ -54,7 +54,6 @@ public class DefaultCompatModule extends AddonModule {
         PsiEXRegistry.PSI_NEEDLE_DART = PsiEXRegistry.ITEMS.register("psi_needle", () ->
                 new ItemNeedleDart(new Item.Properties()));
 
-
         PsiEXRegistry.PSI_ARROW_ENTITY = PsiEXRegistry.ENTITIES.register("psi_arrow_entity", () ->
                 EntityType.Builder.<PsiArrowEntity>of(PsiArrowEntity::new, MobCategory.MISC)
                         .sized(0.5F, 0.5F)

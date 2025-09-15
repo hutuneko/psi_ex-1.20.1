@@ -1,6 +1,5 @@
 package com.hutuneko.psi_ex.system.attribute;
 
-import com.hutuneko.psi_ex.system.PsiEXAttributes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 

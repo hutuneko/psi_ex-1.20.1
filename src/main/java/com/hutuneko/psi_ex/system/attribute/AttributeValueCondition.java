@@ -1,6 +1,7 @@
 // AttributeValueCondition.java
-package com.hutuneko.psi_ex.system;
+package com.hutuneko.psi_ex.system.attribute;
 
+import com.hutuneko.psi_ex.system.PieceCondition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.Player;

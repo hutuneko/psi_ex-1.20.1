@@ -1,8 +1,7 @@
 package com.hutuneko.psi_ex;
 
-import com.hutuneko.psi_ex.cc.CCCCompatInit;
 import com.hutuneko.psi_ex.compat.PsiEXRegistry;
-import com.hutuneko.psi_ex.system.PsiEXAttributes;
+import com.hutuneko.psi_ex.system.attribute.PsiEXAttributes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,10 +34,10 @@ public class PsiEX {
         PsiEXRegistry.TABS.register(modBus);
         PsiEXAttributes.register(modBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        Config.registerConfig();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(CCCCompatInit::init);
 
     }
 

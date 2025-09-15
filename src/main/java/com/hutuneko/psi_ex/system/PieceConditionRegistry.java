@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/** pieceId → 条件 の登録所 */
 public final class PieceConditionRegistry {
 
-    // 必要なら ConcurrentHashMap にしてもOK
     private static final Map<ResourceLocation, PieceCondition> MAP = new HashMap<>();
 
     private PieceConditionRegistry() {}

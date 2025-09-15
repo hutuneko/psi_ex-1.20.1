@@ -25,9 +25,18 @@
   "psi_ex.spellpiece.piecetrick_executespell.desc": "関数とはこういうことを言う...かもしれない。",
   "psi_ex.spellpiece.piecetrick_summonbarrier": "防壁",
   "psi_ex.spellpiece.piecetrick_summonbarrier.desc": "防壁を作り出す",
-  "psi_ex.item.psi_arrow": "術式矢",
-  "psi_ex.item.psi_curio_bullet": "術式弾入れ",
-  "psi_ex.item.psi_spellbook": "術式スペルブック"
+  "psi_ex.spellpiece.piecetrick_eyesave": "標的保存",
+  "psi_ex.spellpiece.piecetrick_eyesave.desc": "精霊の眼にエンティティを保存します",
+  "psi_ex.spellpiece.piecetrick_geteye": "標的捕捉",
+  "psi_ex.spellpiece.piecetrick_geteye.desc": "精霊の眼からエンティティを取得します",
 
+  "psi_ex.item.psi_arrow": "術式矢",
+  "psi_ex.item.psi_curio_bullet": "CAD拡張スロット",
+  "psi_ex.item.psi_spellbook": "CADスペルブック",
+  "psi_ex.item.psi_mana_lens": "マナレンズ: 術式",
+  "psi_ex.item.psi_spirits_eye": "精霊の眼",
+  "psi_ex.item.psi_needle": "術式針",
+
+  "itemGroup.tab.psi_ex": "PsiEX"
 
 }
