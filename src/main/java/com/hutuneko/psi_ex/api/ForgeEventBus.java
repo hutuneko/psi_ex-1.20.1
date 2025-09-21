@@ -12,12 +12,15 @@ import moffy.ticex.modules.general.TicEXRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,7 +31,10 @@ import vazkii.psi.api.spell.ISpellAcceptor;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = PsiEX.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ForgeEventBus {
@@ -44,7 +50,6 @@ public final class ForgeEventBus {
         Optional<SlotResult> res = CuriosUtil.findFirstByItem(p, PsiEXRegistry.PSI_SPELLBOOK.get());
         if (res.isEmpty()) return;
         ItemStack spellbook = res.get().stack();
-        System.out.println(spellbook);
         if (spellbook.isEmpty()) return;
         ISocketable sock = ISocketable.socketable(spellbook);
         if (sock == null ) return;
@@ -95,4 +100,52 @@ public final class ForgeEventBus {
     public static void onAddReloadListener(AddReloadListenerEvent event) {
         event.addListener(new PsiPieceConditionReloadListener());
     }
+
+    private final Map<UUID, Long> recentlyShotPlayers = new HashMap<>();
+    private final Map<UUID, ItemStack> recentlyShotBows = new HashMap<>();
+
+    @SubscribeEvent
+    public void onArrowLoose(ArrowLooseEvent event) {
+        Player player = event.getEntity();
+        ItemStack bow = event.getBow();
+        // 矢を撃ったプレイヤーを記録（タイムスタンプ付き）
+        recentlyShotPlayers.put(player.getUUID(), System.currentTimeMillis());
+        recentlyShotBows.put(player.getUUID(), bow);
+    }
+
+    @SubscribeEvent
+    public void onArrowSpawn(EntityJoinLevelEvent event) {
+        if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
+
+        Entity shooter = arrow.getOwner();
+        if (!(shooter instanceof Player player)) return;
+
+        // 直近で矢を撃ったプレイヤーかどうか確認
+        Long shotTime = recentlyShotPlayers.get(player.getUUID());
+        ItemStack bow = recentlyShotBows.get(player.getUUID());
+        if (shotTime != null && System.currentTimeMillis() - shotTime < 200) {
+
+            if (bow.getItem() == PsiEXRegistry.PSI_BOW.get()){
+                if (bow.isEmpty()) return;
+                ISocketable sock = ISocketable.socketable(bow);
+                if (sock == null ) return;
+                int idx = 1;
+                ItemStack bullet = sock.getBulletInSocket(idx);
+                ISpellAcceptor acc = ISpellAcceptor.acceptor(bullet);
+                if (acc == null || !ISpellAcceptor.hasSpell(bullet)) return;
+                Spell spell = acc.getSpell();
+                SpellContext spellContext = new SpellContext();
+                spellContext.focalPoint = shooter;
+                spellContext.setSpell(spell).setPlayer(player);
+                int cost = spellContext.cspell.metadata.hashCode();
+                spellContext.cspell.safeExecute(spellContext);
+            }
+
+            // 一度使ったら削除
+            recentlyShotPlayers.remove(player.getUUID());
+            recentlyShotBows.remove(player.getUUID());
+        }
+    }
+
+
 }

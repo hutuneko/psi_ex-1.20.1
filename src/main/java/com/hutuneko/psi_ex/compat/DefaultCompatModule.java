@@ -3,10 +3,7 @@ package com.hutuneko.psi_ex.compat;
 import com.hutuneko.psi_ex.PsiEX;
 import com.hutuneko.psi_ex.entity.PsiArrowEntity;
 import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
-import com.hutuneko.psi_ex.item.ItemNeedleDart;
-import com.hutuneko.psi_ex.item.ItemStorage;
-import com.hutuneko.psi_ex.item.Itemtestbullet;
-import com.hutuneko.psi_ex.item.PsiArrowItem;
+import com.hutuneko.psi_ex.item.*;
 import com.hutuneko.psi_ex.spell.operator.PieceOperator_getSeve_Number;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_ScrollData;
 import com.hutuneko.psi_ex.spell.selector.PieceSelector_data;
@@ -53,6 +50,8 @@ public class DefaultCompatModule extends AddonModule {
                 new PsiArrowItem(new Item.Properties()));
         PsiEXRegistry.PSI_NEEDLE_DART = PsiEXRegistry.ITEMS.register("psi_needle", () ->
                 new ItemNeedleDart(new Item.Properties()));
+        PsiEXRegistry.PSI_BOW = PsiEXRegistry.ITEMS.register("psi_bow", () ->
+                new PsiBow(new Item.Properties().stacksTo(1)));
 
         PsiEXRegistry.PSI_ARROW_ENTITY = PsiEXRegistry.ENTITIES.register("psi_arrow_entity", () ->
                 EntityType.Builder.<PsiArrowEntity>of(PsiArrowEntity::new, MobCategory.MISC)

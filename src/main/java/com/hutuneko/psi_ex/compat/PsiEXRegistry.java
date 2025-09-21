@@ -53,6 +53,8 @@ public class PsiEXRegistry {
     public static RegistryObject<Item> PSI_SPELLBOOK = null;
     public static RegistryObject<Item> PSI_SPIRITS_EYE = null;
     public static RegistryObject<Item> PSI_NEEDLE_DART = null;
+    public static RegistryObject<Item> PSI_BOW = null;
+
     public static GasRegistryObject PSI_GAS = null;
 
     public static RegistryObject<EntityType<PsiArrowEntity>> PSI_ARROW_ENTITY = null;
