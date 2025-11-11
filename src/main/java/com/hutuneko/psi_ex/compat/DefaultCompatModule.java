@@ -1,6 +1,7 @@
 package com.hutuneko.psi_ex.compat;
 
 import com.hutuneko.psi_ex.PsiEX;
+import com.hutuneko.psi_ex.entity.PsiAirEntity;
 import com.hutuneko.psi_ex.entity.PsiArrowEntity;
 import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
 import com.hutuneko.psi_ex.item.*;
@@ -35,7 +36,7 @@ public class DefaultCompatModule extends AddonModule {
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_seve_number"), PieceTrick_Seve_Number.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "pieceoperator_getseve_number"), PieceOperator_getSeve_Number.class);
         PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_poisonousbee"), PieceTrick_PoisonousBee.class);
-
+        PsiAPI.registerSpellPieceAndTexture(new ResourceLocation(PsiEX.MOD_ID, "piecetrick_compressedair"), PieceTrick_CompressedAir.class);
 
         PsiEXRegistry.STORAGE = PsiEXRegistry.ITEMS.register("storage", () ->
                 new ItemStorage(new Item.Properties().stacksTo(1))
@@ -83,6 +84,14 @@ public class DefaultCompatModule extends AddonModule {
                         })
                         .build()
         );
+        PsiEXRegistry.PSI_COMPRESSIONAIR_ENTITY =
+                PsiEXRegistry.ENTITIES.register("needle_projectile",
+                        () -> EntityType.Builder
+                                .<PsiAirEntity>of(PsiAirEntity::new, MobCategory.MISC)
+                                .sized(0.25F, 0.25F) // ヒットボックス
+                                .clientTrackingRange(64)
+                                .updateInterval(10)
+                                .build(new ResourceLocation(PsiEX.MOD_ID, "needle_projectile").toString()));
 //        PsiEXRegistry.ATTRIBUTE_EDITOR = PsiEXRegistry.MENUS.register("attribute_editor", () ->
 //                        IForgeMenuType.create((windowId, inv, buf) ->
 //                        new AttributeEditorMenu(windowId, inv)

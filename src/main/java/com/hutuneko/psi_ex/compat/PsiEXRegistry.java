@@ -1,10 +1,7 @@
 package com.hutuneko.psi_ex.compat;
 
 import com.hutuneko.psi_ex.PsiEX;
-import com.hutuneko.psi_ex.entity.PsiArrowEntity;
-import com.hutuneko.psi_ex.entity.PsiBarrierEntity;
-import com.hutuneko.psi_ex.entity.PsiNeedleDartEntity;
-import com.hutuneko.psi_ex.entity.PsiTestEntity;
+import com.hutuneko.psi_ex.entity.*;
 import com.hutuneko.psi_ex.system.attribute.AttributeEditorMenu;
 import mekanism.common.registration.impl.GasDeferredRegister;
 import mekanism.common.registration.impl.GasRegistryObject;
@@ -61,6 +58,7 @@ public class PsiEXRegistry {
     public static RegistryObject<EntityType<PsiNeedleDartEntity>> PSI_NEEDLE_DARTENTITY = null;
     public static RegistryObject<EntityType<PsiBarrierEntity>> PSI_BRRIER_ENTITY = null;
     public static RegistryObject<EntityType<PsiTestEntity>> PSI_TEST_ENTITY = null;
+    public static RegistryObject<EntityType<PsiAirEntity>> PSI_COMPRESSIONAIR_ENTITY = null;
 
     public static RegistryObject<MenuType<AttributeEditorMenu>> ATTRIBUTE_EDITOR = null;
 

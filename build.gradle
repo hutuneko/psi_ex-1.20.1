@@ -226,11 +226,6 @@ tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += ["-parameters"]
 }
 
-mixin {
-    // MixinGradle Settings
-    add sourceSets.main, "mixins.psi_ex.refmap.json"
-    config 'mixins.psi_ex.json'
-}
 repositories {
     maven { url "https://cursemaven.com" }
     maven { url = "https://api.modrinth.com/maven"}
